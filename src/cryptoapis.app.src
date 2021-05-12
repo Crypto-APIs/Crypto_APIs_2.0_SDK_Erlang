@@ -12,7 +12,6 @@
   {env, [{host, "rest.cryptoapis.io"}]},
   {modules, []},
 
-  {maintainers, []},
   {licenses, ["MIT"]},
   {links, ["https://cryptoapis.io"]}
 ]}.
