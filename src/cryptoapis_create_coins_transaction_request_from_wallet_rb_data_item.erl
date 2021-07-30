@@ -5,13 +5,19 @@
 -export_type([cryptoapis_create_coins_transaction_request_from_wallet_rb_data_item/0]).
 
 -type cryptoapis_create_coins_transaction_request_from_wallet_rb_data_item() ::
-    #{ 'destinations' := list(),
-       'feePriority' := binary()
+    #{ 'callbackSecretKey' => binary(),
+       'callbackUrl' => binary(),
+       'feePriority' := binary(),
+       'recipients' := list()
      }.
 
-encode(#{ 'destinations' := Destinations,
-          'feePriority' := FeePriority
+encode(#{ 'callbackSecretKey' := CallbackSecretKey,
+          'callbackUrl' := CallbackUrl,
+          'feePriority' := FeePriority,
+          'recipients' := Recipients
         }) ->
-    #{ 'destinations' => Destinations,
-       'feePriority' => FeePriority
+    #{ 'callbackSecretKey' => CallbackSecretKey,
+       'callbackUrl' => CallbackUrl,
+       'feePriority' => FeePriority,
+       'recipients' => Recipients
      }.

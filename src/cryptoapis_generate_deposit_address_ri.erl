@@ -1,10 +1,10 @@
--module(cryptoapis_list_receiving_addresses_ri).
+-module(cryptoapis_generate_deposit_address_ri).
 
 -export([encode/1]).
 
--export_type([cryptoapis_list_receiving_addresses_ri/0]).
+-export_type([cryptoapis_generate_deposit_address_ri/0]).
 
--type cryptoapis_list_receiving_addresses_ri() ::
+-type cryptoapis_generate_deposit_address_ri() ::
     #{ 'address' := binary(),
        'createdTimestamp' := integer(),
        'label' := binary()

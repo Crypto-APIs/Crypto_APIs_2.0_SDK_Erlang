@@ -27,7 +27,7 @@ get_internal_transaction_by_transaction_hash_and_operation_id(Ctx, Blockchain, N
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Internal Transaction Details by Transaction Hash
-%% Through this endpoint customers can list internal transactions along with their details by a specific attribute `transactionHash`, which is the parent transaction's Hash.    An internal transaction is the result of a smart contract being triggered by an EOA or a subsequent contract call.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% Through this endpoint customers can list internal transactions along with their details by a specific attribute `transactionHash`, which is the parent transaction's Hash.    An internal transaction is the result of a smart contract being triggered by an EOA or a subsequent contract call.
 -spec list_internal_transaction_details_by_transaction_hash(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_internal_transaction_details_by_transaction_hash_r:cryptoapis_list_internal_transaction_details_by_transaction_hash_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_internal_transaction_details_by_transaction_hash(Ctx, Blockchain, Network, TransactionHash) ->
     list_internal_transaction_details_by_transaction_hash(Ctx, Blockchain, Network, TransactionHash, #{}).

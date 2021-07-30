@@ -54,7 +54,7 @@ get_unconfirmed_omni_transaction_by_transaction_id_(txid)(Ctx, Network, Blockcha
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Omni Tokens By Address
-%% Through this endpoint the customer can receive basic information about a given Omni address based on confirmed/synced blocks only. In the case where there are any incoming or outgoing **unconfirmed** transactions for the specific address, they **will not** be counted or calculated here.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% Through this endpoint the customer can receive basic information about a given Omni address based on confirmed/synced blocks only. In the case where there are any incoming or outgoing **unconfirmed** transactions for the specific address, they **will not** be counted or calculated here.
 -spec list_omni_tokens_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_omni_tokens_by_address_r:cryptoapis_list_omni_tokens_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_omni_tokens_by_address(Ctx, Network, Blockchain, Address) ->
     list_omni_tokens_by_address(Ctx, Network, Blockchain, Address, #{}).
@@ -75,7 +75,7 @@ list_omni_tokens_by_address(Ctx, Network, Blockchain, Address, Optional) ->
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Omni Transactions By Address
-%% This endpoint will list Omni transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list Omni transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.
 -spec list_omni_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_omni_transactions_by_address_r:cryptoapis_list_omni_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_omni_transactions_by_address(Ctx, Network, Blockchain, Address) ->
     list_omni_transactions_by_address(Ctx, Network, Blockchain, Address, #{}).
@@ -96,7 +96,7 @@ list_omni_transactions_by_address(Ctx, Network, Blockchain, Address, Optional) -
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Omni Transactions By Block Hash
-%% This endpoint will list Omni transactions by an attribute `transactionHash`. The transactions listed will detail additional information such as addresses, height, time of creation in Unix timestamp, etc.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list Omni transactions by an attribute `transactionHash`. The transactions listed will detail additional information such as addresses, height, time of creation in Unix timestamp, etc.
 -spec list_omni_transactions_by_block_hash(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_omni_transactions_by_block_hash_r:cryptoapis_list_omni_transactions_by_block_hash_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_omni_transactions_by_block_hash(Ctx, Network, Blockchain, BlockHash) ->
     list_omni_transactions_by_block_hash(Ctx, Network, Blockchain, BlockHash, #{}).
@@ -117,7 +117,7 @@ list_omni_transactions_by_block_hash(Ctx, Network, Blockchain, BlockHash, Option
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Omni Transactions By Block Height
-%% This endpoint will list Omni transactions by an attribute `blockHeight`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list Omni transactions by an attribute `blockHeight`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.
 -spec list_omni_transactions_by_block_height(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_omni_transactions_by_block_height_r:cryptoapis_list_omni_transactions_by_block_height_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_omni_transactions_by_block_height(Ctx, Network, Blockchain, BlockHeight) ->
     list_omni_transactions_by_block_height(Ctx, Network, Blockchain, BlockHeight, #{}).
@@ -138,7 +138,7 @@ list_omni_transactions_by_block_height(Ctx, Network, Blockchain, BlockHeight, Op
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Unconfirmed Omni Transactions By Address
-%% This endpoint will list unconfirmed Omni transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    Unconfirmed transactions are usually put in the Mempool and await verification so that they can be added to a block.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list unconfirmed Omni transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    Unconfirmed transactions are usually put in the Mempool and await verification so that they can be added to a block.
 -spec list_unconfirmed_omni_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_unconfirmed_omni_transactions_by_address_r:cryptoapis_list_unconfirmed_omni_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_unconfirmed_omni_transactions_by_address(Ctx, Network, Blockchain, Address) ->
     list_unconfirmed_omni_transactions_by_address(Ctx, Network, Blockchain, Address, #{}).
@@ -159,7 +159,7 @@ list_unconfirmed_omni_transactions_by_address(Ctx, Network, Blockchain, Address,
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Unconfirmed Omni Transactions By Property ID
-%% This endpoint will list unconfirmed Omni transactions by an attribute `propertyId`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    Unconfirmed transactions are usually put in the Mempool and await verification so that they can be added to a block.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list unconfirmed Omni transactions by an attribute `propertyId`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    Unconfirmed transactions are usually put in the Mempool and await verification so that they can be added to a block.
 -spec list_unconfirmed_omni_transactions_by_property_id(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_unconfirmed_omni_transactions_by_property_idr:cryptoapis_list_unconfirmed_omni_transactions_by_property_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_unconfirmed_omni_transactions_by_property_id(Ctx, Network, Blockchain, PropertyId) ->
     list_unconfirmed_omni_transactions_by_property_id(Ctx, Network, Blockchain, PropertyId, #{}).

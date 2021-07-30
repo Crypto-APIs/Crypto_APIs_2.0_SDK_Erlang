@@ -139,7 +139,7 @@ get_transaction_details_by_transaction_id(Ctx, Blockchain, Network, TransactionI
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Transactions By Address
-%% This endpoint will list transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.
 -spec list_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_transactions_by_address_r:cryptoapis_list_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_transactions_by_address(Ctx, Blockchain, Network, Address) ->
     list_transactions_by_address(Ctx, Blockchain, Network, Address, #{}).
@@ -160,7 +160,7 @@ list_transactions_by_address(Ctx, Blockchain, Network, Address, Optional) ->
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Transactions by Block Hash
-%% This endpoint will list transactions by an attribute `transactionHash`. The transactions listed will detail additional information such as addresses, height, time of creation in Unix timestamp, etc.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list transactions by an attribute `transactionHash`. The transactions listed will detail additional information such as addresses, height, time of creation in Unix timestamp, etc.
 -spec list_transactions_by_block_hash(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_transactions_by_block_hash_r:cryptoapis_list_transactions_by_block_hash_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_transactions_by_block_hash(Ctx, Blockchain, Network, BlockHash) ->
     list_transactions_by_block_hash(Ctx, Blockchain, Network, BlockHash, #{}).
@@ -181,7 +181,7 @@ list_transactions_by_block_hash(Ctx, Blockchain, Network, BlockHash, Optional) -
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Transactions by Block Height
-%% This endpoint will list transactions by an attribute `blockHeight`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list transactions by an attribute `blockHeight`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.
 -spec list_transactions_by_block_height(ctx:ctx(), binary(), binary(), integer()) -> {ok, cryptoapis_list_transactions_by_block_height_r:cryptoapis_list_transactions_by_block_height_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_transactions_by_block_height(Ctx, Blockchain, Network, Height) ->
     list_transactions_by_block_height(Ctx, Blockchain, Network, Height, #{}).

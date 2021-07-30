@@ -1,17 +1,17 @@
--module(cryptoapis_transaction_request_broadcasted_data_item).
+-module(cryptoapis_transaction_request_fail_data_item).
 
 -export([encode/1]).
 
--export_type([cryptoapis_transaction_request_broadcasted_data_item/0]).
+-export_type([cryptoapis_transaction_request_fail_data_item/0]).
 
--type cryptoapis_transaction_request_broadcasted_data_item() ::
+-type cryptoapis_transaction_request_fail_data_item() ::
     #{ 'blockchain' := binary(),
        'network' := binary(),
        'requiredApprovals' := integer(),
        'requiredRejections' := integer(),
        'currentApprovals' := integer(),
        'currentRejections' := integer(),
-       'transactionId' := binary()
+       'errorMessage' := binary()
      }.
 
 encode(#{ 'blockchain' := Blockchain,
@@ -20,7 +20,7 @@ encode(#{ 'blockchain' := Blockchain,
           'requiredRejections' := RequiredRejections,
           'currentApprovals' := CurrentApprovals,
           'currentRejections' := CurrentRejections,
-          'transactionId' := TransactionId
+          'errorMessage' := ErrorMessage
         }) ->
     #{ 'blockchain' => Blockchain,
        'network' => Network,
@@ -28,5 +28,5 @@ encode(#{ 'blockchain' := Blockchain,
        'requiredRejections' => RequiredRejections,
        'currentApprovals' => CurrentApprovals,
        'currentRejections' => CurrentRejections,
-       'transactionId' => TransactionId
+       'errorMessage' => ErrorMessage
      }.

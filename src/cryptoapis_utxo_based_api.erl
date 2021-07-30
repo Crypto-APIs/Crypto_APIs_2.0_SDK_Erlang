@@ -28,7 +28,7 @@ get_hd_wallet_(x_pub,_y_pub,_z_pub)_details(Ctx, Blockchain, ExtendedPublicKey, 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List HD Wallet (xPub, yPub, zPub) Transactions
-%% This endpoint will list HD Wallet transactions.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list HD Wallet transactions.
 -spec list_hd_wallet_(x_pub,_y_pub,_z_pub)_transactions(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_hd_wallet_x_pub_y_pub_z_pub_transactions_r:cryptoapis_list_hd_wallet_x_pub_y_pub_z_pub_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_hd_wallet_(x_pub,_y_pub,_z_pub)_transactions(Ctx, Blockchain, ExtendedPublicKey, Network) ->
     list_hd_wallet_(x_pub,_y_pub,_z_pub)_transactions(Ctx, Blockchain, ExtendedPublicKey, Network, #{}).

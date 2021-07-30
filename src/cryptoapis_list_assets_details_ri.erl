@@ -13,7 +13,7 @@
        'assetType' := binary(),
        'latestRate' := cryptoapis_list_assets_details_ri_latest_rate:cryptoapis_list_assets_details_ri_latest_rate(),
        'slug' => binary(),
-       'specificData' := cryptoapis_list_assets_details_ri_specific_data:cryptoapis_list_assets_details_ri_specific_data()
+       'specificData' := cryptoapis_list_assets_details_ris:cryptoapis_list_assets_details_ris()
      }.
 
 encode(#{ 'assetId' := AssetId,

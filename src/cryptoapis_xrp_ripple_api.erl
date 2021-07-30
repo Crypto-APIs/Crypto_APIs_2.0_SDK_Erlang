@@ -117,7 +117,7 @@ get_xrp_(ripple)_transaction_details_by_transaction_id(Ctx, Network, Transaction
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List XRP (Ripple) Transactions by Address
-%% This endpoint will list XRP transactions by a attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    Since XRP is a different blockchain than Bitcoin and Ethereum, it isn't unified.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list XRP transactions by a attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.    Since XRP is a different blockchain than Bitcoin and Ethereum, it isn't unified.
 -spec list_xrp_(ripple)_transactions_by_address(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_list_xrp_ripple_transactions_by_address_r:cryptoapis_list_xrp_ripple_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_xrp_(ripple)_transactions_by_address(Ctx, Network, Address) ->
     list_xrp_(ripple)_transactions_by_address(Ctx, Network, Address, #{}).
@@ -129,7 +129,7 @@ list_xrp_(ripple)_transactions_by_address(Ctx, Network, Address, Optional) ->
 
     Method = get,
     Path = [<<"/blockchain-data/xrp-specific/", Network, "/addresses/", Address, "/transactions">>],
-    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset', 'transactionType'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
@@ -138,7 +138,7 @@ list_xrp_(ripple)_transactions_by_address(Ctx, Network, Address, Optional) ->
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List XRP (Ripple) Transactions By Block Hash
-%% This endpoint will list transactions by an attribute `blockHash`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.    Since XRP is a different blockchain than Bitcoin and Ethereum, it isn't unified.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list transactions by an attribute `blockHash`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.    Since XRP is a different blockchain than Bitcoin and Ethereum, it isn't unified.
 -spec list_xrp_(ripple)_transactions_by_block_hash(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_list_xrp_ripple_transactions_by_block_hash_r:cryptoapis_list_xrp_ripple_transactions_by_block_hash_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_xrp_(ripple)_transactions_by_block_hash(Ctx, Network, BlockHash) ->
     list_xrp_(ripple)_transactions_by_block_hash(Ctx, Network, BlockHash, #{}).
@@ -159,7 +159,7 @@ list_xrp_(ripple)_transactions_by_block_hash(Ctx, Network, BlockHash, Optional) 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List XRP (Ripple) Transactions By Block Height
-%% This endpoint will list transactions by an attribute `blockHeight`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.    Since XRP is a different blockchain than Bitcoin and Ethereum, it isn't unified.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% This endpoint will list transactions by an attribute `blockHeight`. The transactions listed will detail additional information such as hash, addresses, time of creation in Unix timestamp, etc.    Since XRP is a different blockchain than Bitcoin and Ethereum, it isn't unified.
 -spec list_xrp_(ripple)_transactions_by_block_height(ctx:ctx(), binary(), integer()) -> {ok, cryptoapis_list_xrp_ripple_transactions_by_block_height_r:cryptoapis_list_xrp_ripple_transactions_by_block_height_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_xrp_(ripple)_transactions_by_block_height(Ctx, Network, BlockHeight) ->
     list_xrp_(ripple)_transactions_by_block_height(Ctx, Network, BlockHeight, #{}).

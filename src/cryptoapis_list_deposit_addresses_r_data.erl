@@ -1,10 +1,10 @@
--module(cryptoapis_list_receiving_addresses_r_data).
+-module(cryptoapis_list_deposit_addresses_r_data).
 
 -export([encode/1]).
 
--export_type([cryptoapis_list_receiving_addresses_r_data/0]).
+-export_type([cryptoapis_list_deposit_addresses_r_data/0]).
 
--type cryptoapis_list_receiving_addresses_r_data() ::
+-type cryptoapis_list_deposit_addresses_r_data() ::
     #{ 'offset' := integer(),
        'limit' := integer(),
        'total' := integer(),

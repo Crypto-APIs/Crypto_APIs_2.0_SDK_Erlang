@@ -5,8 +5,7 @@
 -export_type([cryptoapis_list_xrp_ripple_transactions_by_address_ri/0]).
 
 -type cryptoapis_list_xrp_ripple_transactions_by_address_ri() ::
-    #{ 'additionalData' := binary(),
-       'index' := integer(),
+    #{ 'index' := integer(),
        'minedInBlockHash' := binary(),
        'minedInBlockHeight' := integer(),
        'recipients' := list(),
@@ -22,8 +21,7 @@
        'value' := cryptoapis_list_xrp_ripple_transactions_by_address_ri_value:cryptoapis_list_xrp_ripple_transactions_by_address_ri_value()
      }.
 
-encode(#{ 'additionalData' := AdditionalData,
-          'index' := Index,
+encode(#{ 'index' := Index,
           'minedInBlockHash' := MinedInBlockHash,
           'minedInBlockHeight' := MinedInBlockHeight,
           'recipients' := Recipients,
@@ -38,8 +36,7 @@ encode(#{ 'additionalData' := AdditionalData,
           'Receive_' := Receive,
           'value' := Value
         }) ->
-    #{ 'additionalData' => AdditionalData,
-       'index' => Index,
+    #{ 'index' => Index,
        'minedInBlockHash' => MinedInBlockHash,
        'minedInBlockHeight' => MinedInBlockHeight,
        'recipients' => Recipients,

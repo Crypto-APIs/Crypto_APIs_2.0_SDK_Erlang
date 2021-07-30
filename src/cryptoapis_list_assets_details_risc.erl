@@ -1,10 +1,10 @@
--module(cryptoapis_list_assets_details_ri_specific_data).
+-module(cryptoapis_list_assets_details_risc).
 
 -export([encode/1]).
 
--export_type([cryptoapis_list_assets_details_ri_specific_data/0]).
+-export_type([cryptoapis_list_assets_details_risc/0]).
 
--type cryptoapis_list_assets_details_ri_specific_data() ::
+-type cryptoapis_list_assets_details_risc() ::
     #{ '1HourPriceChangeInPercentage' := binary(),
        '1WeekPriceChangeInPercentage' := binary(),
        '24HoursPriceChangeInPercentage' := binary(),

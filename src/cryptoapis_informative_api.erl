@@ -1,7 +1,7 @@
 -module(cryptoapis_informative_api).
 
 -export([get_wallet_asset_details/4, get_wallet_asset_details/5,
-         list_receiving_addresses/4, list_receiving_addresses/5,
+         list_deposit_addresses/4, list_deposit_addresses/5,
          list_supported_tokens/3, list_supported_tokens/4]).
 
 -define(BASE_URL, <<"/v2">>).
@@ -27,14 +27,14 @@ get_wallet_asset_details(Ctx, Blockchain, Network, WalletId, Optional) ->
 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
-%% @doc List Receiving Addresses
-%% Through this endpoint customers can pull a list of Deposit Addresses they have already generated. Deposit addresses are listed with their specific details such as unique ID.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
--spec list_receiving_addresses(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_receiving_addresses_r:cryptoapis_list_receiving_addresses_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-list_receiving_addresses(Ctx, Blockchain, Network, WalletId) ->
-    list_receiving_addresses(Ctx, Blockchain, Network, WalletId, #{}).
+%% @doc List Deposit Addresses
+%% Through this endpoint customers can pull a list of Deposit/Receiving Addresses they have already generated.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+-spec list_deposit_addresses(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_deposit_addresses_r:cryptoapis_list_deposit_addresses_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_deposit_addresses(Ctx, Blockchain, Network, WalletId) ->
+    list_deposit_addresses(Ctx, Blockchain, Network, WalletId, #{}).
 
--spec list_receiving_addresses(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_receiving_addresses_r:cryptoapis_list_receiving_addresses_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-list_receiving_addresses(Ctx, Blockchain, Network, WalletId, Optional) ->
+-spec list_deposit_addresses(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_deposit_addresses_r:cryptoapis_list_deposit_addresses_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_deposit_addresses(Ctx, Blockchain, Network, WalletId, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
@@ -49,7 +49,7 @@ list_receiving_addresses(Ctx, Blockchain, Network, WalletId, Optional) ->
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Supported Tokens
-%% Through this endpoint customers can obtain information on multiple tokens at once.     {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% Through this endpoint customers can obtain information on multiple tokens at once.
 -spec list_supported_tokens(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_list_supported_tokens_r:cryptoapis_list_supported_tokens_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_supported_tokens(Ctx, Blockchain, Network) ->
     list_supported_tokens(Ctx, Blockchain, Network, #{}).

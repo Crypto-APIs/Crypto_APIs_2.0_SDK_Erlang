@@ -117,7 +117,7 @@ get_zilliqa_transaction_details_by_transaction_id(Ctx, Network, TransactionHash,
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Zilliqa Transactions by Address
-%% Through this endpoint customers can list transactions on the Zilliqa blockchain by the address parameter.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% Through this endpoint customers can list transactions on the Zilliqa blockchain by the address parameter.
 -spec list_zilliqa_transactions_by_address(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_list_zilliqa_transactions_by_address_r:cryptoapis_list_zilliqa_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_zilliqa_transactions_by_address(Ctx, Network, Address) ->
     list_zilliqa_transactions_by_address(Ctx, Network, Address, #{}).
@@ -138,7 +138,7 @@ list_zilliqa_transactions_by_address(Ctx, Network, Address, Optional) ->
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Zilliqa Transactions By Block Hash
-%% Through this endpoint customers can list transactions on the Zilliqa blockchain by the block hash parameter.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% Through this endpoint customers can list transactions on the Zilliqa blockchain by the block hash parameter.
 -spec list_zilliqa_transactions_by_block_hash(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_list_zilliqa_transactions_by_block_hash_r:cryptoapis_list_zilliqa_transactions_by_block_hash_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_zilliqa_transactions_by_block_hash(Ctx, Network, BlockHash) ->
     list_zilliqa_transactions_by_block_hash(Ctx, Network, BlockHash, #{}).
@@ -159,7 +159,7 @@ list_zilliqa_transactions_by_block_hash(Ctx, Network, BlockHash, Optional) ->
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Zilliqa Transactions By Block Height
-%% Through this endpoint customers can list transactions on the Zilliqa blockchain by the block height parameter.    {note}Please note that listing data from the same type will apply pagination on the results.{/note}
+%% Through this endpoint customers can list transactions on the Zilliqa blockchain by the block height parameter.
 -spec list_zilliqa_transactions_by_block_height(ctx:ctx(), binary(), integer()) -> {ok, cryptoapis_list_zilliqa_transactions_by_block_height_r:cryptoapis_list_zilliqa_transactions_by_block_height_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_zilliqa_transactions_by_block_height(Ctx, Network, BlockHeight) ->
     list_zilliqa_transactions_by_block_height(Ctx, Network, BlockHeight, #{}).

@@ -6,15 +6,21 @@
 
 -type cryptoapis_create_coins_transaction_request_from_address_rb_data_item() ::
     #{ 'amount' := binary(),
+       'callbackSecretKey' => binary(),
+       'callbackUrl' => binary(),
        'feePriority' := binary(),
-       'toAddress' := binary()
+       'recipientAddress' := binary()
      }.
 
 encode(#{ 'amount' := Amount,
+          'callbackSecretKey' := CallbackSecretKey,
+          'callbackUrl' := CallbackUrl,
           'feePriority' := FeePriority,
-          'toAddress' := ToAddress
+          'recipientAddress' := RecipientAddress
         }) ->
     #{ 'amount' => Amount,
+       'callbackSecretKey' => CallbackSecretKey,
+       'callbackUrl' => CallbackUrl,
        'feePriority' => FeePriority,
-       'toAddress' => ToAddress
+       'recipientAddress' => RecipientAddress
      }.
