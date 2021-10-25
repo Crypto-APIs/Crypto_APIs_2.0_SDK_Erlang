@@ -6,7 +6,7 @@
 
 -type cryptoapis_get_block_details_by_block_hash_ribsbc() ::
     #{ 'difficulty' := binary(),
-       'nonce' := integer(),
+       'nonce' := binary(),
        'size' := integer(),
        'bits' := binary(),
        'chainwork' := binary(),

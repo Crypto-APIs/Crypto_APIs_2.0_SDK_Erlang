@@ -6,8 +6,8 @@
 
 -type cryptoapis_delete_automatic_coins_forwarding_ri() ::
     #{ 'callbackUrl' := binary(),
-       'confirmationsCount' := binary(),
-       'createdTimestamp' := binary(),
+       'confirmationsCount' := integer(),
+       'createdTimestamp' := integer(),
        'feePriority' := binary(),
        'fromAddress' := binary(),
        'minimumTransferAmount' := binary(),

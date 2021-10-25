@@ -6,7 +6,7 @@
 
 -type cryptoapis_get_block_details_by_block_height_ribs() ::
     #{ 'difficulty' := binary(),
-       'nonce' := integer(),
+       'nonce' := binary(),
        'size' := integer(),
        'bits' := binary(),
        'chainwork' := binary(),
@@ -20,7 +20,8 @@
        'gasUsed' := binary(),
        'minedInSeconds' := integer(),
        'sha3Uncles' := binary(),
-       'totalDifficulty' := binary()
+       'totalDifficulty' := binary(),
+       'merkleroot' := binary()
      }.
 
 encode(#{ 'difficulty' := Difficulty,
@@ -38,7 +39,8 @@ encode(#{ 'difficulty' := Difficulty,
           'gasUsed' := GasUsed,
           'minedInSeconds' := MinedInSeconds,
           'sha3Uncles' := Sha3Uncles,
-          'totalDifficulty' := TotalDifficulty
+          'totalDifficulty' := TotalDifficulty,
+          'merkleroot' := Merkleroot
         }) ->
     #{ 'difficulty' => Difficulty,
        'nonce' => Nonce,
@@ -55,5 +57,6 @@ encode(#{ 'difficulty' := Difficulty,
        'gasUsed' => GasUsed,
        'minedInSeconds' => MinedInSeconds,
        'sha3Uncles' => Sha3Uncles,
-       'totalDifficulty' => TotalDifficulty
+       'totalDifficulty' => TotalDifficulty,
+       'merkleroot' => Merkleroot
      }.

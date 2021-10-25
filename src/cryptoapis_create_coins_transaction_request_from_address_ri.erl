@@ -8,22 +8,28 @@
     #{ 'callbackSecretKey' => binary(),
        'callbackUrl' => binary(),
        'feePriority' := binary(),
+       'note' => binary(),
        'recipients' := list(),
        'senders' := cryptoapis_create_coins_transaction_request_from_address_ri_senders:cryptoapis_create_coins_transaction_request_from_address_ri_senders(),
+       'transactionRequestId' := binary(),
        'transactionRequestStatus' := binary()
      }.
 
 encode(#{ 'callbackSecretKey' := CallbackSecretKey,
           'callbackUrl' := CallbackUrl,
           'feePriority' := FeePriority,
+          'note' := Note,
           'recipients' := Recipients,
           'senders' := Senders,
+          'transactionRequestId' := TransactionRequestId,
           'transactionRequestStatus' := TransactionRequestStatus
         }) ->
     #{ 'callbackSecretKey' => CallbackSecretKey,
        'callbackUrl' => CallbackUrl,
        'feePriority' => FeePriority,
+       'note' => Note,
        'recipients' => Recipients,
        'senders' => Senders,
+       'transactionRequestId' => TransactionRequestId,
        'transactionRequestStatus' => TransactionRequestStatus
      }.

@@ -7,23 +7,23 @@
 -type cryptoapis_get_transaction_details_by_transaction_idribsl() ::
     #{ 'locktime' := integer(),
        'size' := integer(),
+       'vSize' := integer(),
        'version' := integer(),
        'vin' := list(),
-       'vout' := list(),
-       'vsize' := integer()
+       'vout' := list()
      }.
 
 encode(#{ 'locktime' := Locktime,
           'size' := Size,
+          'vSize' := VSize,
           'version' := Version,
           'vin' := Vin,
-          'vout' := Vout,
-          'vsize' := Vsize
+          'vout' := Vout
         }) ->
     #{ 'locktime' => Locktime,
        'size' => Size,
+       'vSize' => VSize,
        'version' => Version,
        'vin' => Vin,
-       'vout' => Vout,
-       'vsize' => Vsize
+       'vout' => Vout
      }.

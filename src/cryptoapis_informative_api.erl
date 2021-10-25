@@ -1,10 +1,33 @@
 -module(cryptoapis_informative_api).
 
--export([get_wallet_asset_details/4, get_wallet_asset_details/5,
+-export([get_transaction_request_details/2, get_transaction_request_details/3,
+         get_wallet_asset_details/4, get_wallet_asset_details/5,
          list_deposit_addresses/4, list_deposit_addresses/5,
-         list_supported_tokens/3, list_supported_tokens/4]).
+         list_supported_tokens/3, list_supported_tokens/4,
+         list_wallet_transactions/4, list_wallet_transactions/5]).
 
 -define(BASE_URL, <<"/v2">>).
+
+%% @doc Get Transaction Request Details
+%% Through this endpoint customers can obtain details on transaction request.    {note}This regards **transaction requests**, which is not to be confused with **transactions**. Transaction requests may not be approved due to any reason, hence a transaction may not occur.{/note}
+-spec get_transaction_request_details(ctx:ctx(), binary()) -> {ok, cryptoapis_get_transaction_request_details_r:cryptoapis_get_transaction_request_details_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_transaction_request_details(Ctx, TransactionRequestId) ->
+    get_transaction_request_details(Ctx, TransactionRequestId, #{}).
+
+-spec get_transaction_request_details(ctx:ctx(), binary(), maps:map()) -> {ok, cryptoapis_get_transaction_request_details_r:cryptoapis_get_transaction_request_details_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_transaction_request_details(Ctx, TransactionRequestId, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/wallet-as-a-service/transactionRequests/", TransactionRequestId, "">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Get Wallet Asset Details
 %% Through this endpoint customers can obtain details about a specific Wallet/Vault.
@@ -61,6 +84,27 @@ list_supported_tokens(Ctx, Blockchain, Network, Optional) ->
 
     Method = get,
     Path = [<<"/wallet-as-a-service/info/", Blockchain, "/", Network, "/supported-tokens">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List Wallet Transactions
+%% Through this endpoint customers can list Transactions from and to their Wallet. The data returned will include `transactionId`, `direction` of the transaction - incoming or outgoing, `amount` and more.
+-spec list_wallet_transactions(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_wallet_transactions_r:cryptoapis_list_wallet_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_wallet_transactions(Ctx, Blockchain, Network, WalletId) ->
+    list_wallet_transactions(Ctx, Blockchain, Network, WalletId, #{}).
+
+-spec list_wallet_transactions(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_wallet_transactions_r:cryptoapis_list_wallet_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_wallet_transactions(Ctx, Blockchain, Network, WalletId, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/wallet-as-a-service/wallets/", WalletId, "/", Blockchain, "/", Network, "/transactions">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
     Headers = [],
     Body1 = [],

@@ -1,0 +1,77 @@
+-module(cryptoapis_list_unconfirmed_transactions_by_address_ribs).
+
+-export([encode/1]).
+
+-export_type([cryptoapis_list_unconfirmed_transactions_by_address_ribs/0]).
+
+-type cryptoapis_list_unconfirmed_transactions_by_address_ribs() ::
+    #{ 'locktime' := integer(),
+       'size' := integer(),
+       'vSize' := integer(),
+       'version' := integer(),
+       'vin' := list(),
+       'vout' := list(),
+       'fee' := cryptoapis_list_unconfirmed_transactions_by_address_ribsec_fee:cryptoapis_list_unconfirmed_transactions_by_address_ribsec_fee(),
+       'gasLimit' := binary(),
+       'gasPrice' := cryptoapis_list_confirmed_transactions_by_address_ribsbsc_gas_price:cryptoapis_list_confirmed_transactions_by_address_ribsbsc_gas_price(),
+       'inputData' := binary(),
+       'nonce' := integer(),
+       'transactionStatus' := binary(),
+       'bindingSig' := binary(),
+       'expiryHeight' := integer(),
+       'joinSplitPubKey' := binary(),
+       'joinSplitSig' := binary(),
+       'overwintered' := boolean(),
+       'vJoinSplit' := list(),
+       'vShieldedOutput' := list(),
+       'vShieldedSpend' := list(),
+       'valueBalance' := binary(),
+       'versionGroupId' := binary()
+     }.
+
+encode(#{ 'locktime' := Locktime,
+          'size' := Size,
+          'vSize' := VSize,
+          'version' := Version,
+          'vin' := Vin,
+          'vout' := Vout,
+          'fee' := Fee,
+          'gasLimit' := GasLimit,
+          'gasPrice' := GasPrice,
+          'inputData' := InputData,
+          'nonce' := Nonce,
+          'transactionStatus' := TransactionStatus,
+          'bindingSig' := BindingSig,
+          'expiryHeight' := ExpiryHeight,
+          'joinSplitPubKey' := JoinSplitPubKey,
+          'joinSplitSig' := JoinSplitSig,
+          'overwintered' := Overwintered,
+          'vJoinSplit' := VJoinSplit,
+          'vShieldedOutput' := VShieldedOutput,
+          'vShieldedSpend' := VShieldedSpend,
+          'valueBalance' := ValueBalance,
+          'versionGroupId' := VersionGroupId
+        }) ->
+    #{ 'locktime' => Locktime,
+       'size' => Size,
+       'vSize' => VSize,
+       'version' => Version,
+       'vin' => Vin,
+       'vout' => Vout,
+       'fee' => Fee,
+       'gasLimit' => GasLimit,
+       'gasPrice' => GasPrice,
+       'inputData' => InputData,
+       'nonce' => Nonce,
+       'transactionStatus' => TransactionStatus,
+       'bindingSig' => BindingSig,
+       'expiryHeight' => ExpiryHeight,
+       'joinSplitPubKey' => JoinSplitPubKey,
+       'joinSplitSig' => JoinSplitSig,
+       'overwintered' => Overwintered,
+       'vJoinSplit' => VJoinSplit,
+       'vShieldedOutput' => VShieldedOutput,
+       'vShieldedSpend' => VShieldedSpend,
+       'valueBalance' => ValueBalance,
+       'versionGroupId' => VersionGroupId
+     }.

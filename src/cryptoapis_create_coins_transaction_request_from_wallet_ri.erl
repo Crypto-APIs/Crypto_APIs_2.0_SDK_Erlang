@@ -8,22 +8,28 @@
     #{ 'callbackSecretKey' => binary(),
        'callbackUrl' => binary(),
        'feePriority' := binary(),
+       'note' => binary(),
        'recipients' := list(),
        'totalTransactionAmount' := binary(),
+       'transactionRequestId' := binary(),
        'transactionRequestStatus' := binary()
      }.
 
 encode(#{ 'callbackSecretKey' := CallbackSecretKey,
           'callbackUrl' := CallbackUrl,
           'feePriority' := FeePriority,
+          'note' := Note,
           'recipients' := Recipients,
           'totalTransactionAmount' := TotalTransactionAmount,
+          'transactionRequestId' := TransactionRequestId,
           'transactionRequestStatus' := TransactionRequestStatus
         }) ->
     #{ 'callbackSecretKey' => CallbackSecretKey,
        'callbackUrl' => CallbackUrl,
        'feePriority' => FeePriority,
+       'note' => Note,
        'recipients' => Recipients,
        'totalTransactionAmount' => TotalTransactionAmount,
+       'transactionRequestId' => TransactionRequestId,
        'transactionRequestStatus' => TransactionRequestStatus
      }.

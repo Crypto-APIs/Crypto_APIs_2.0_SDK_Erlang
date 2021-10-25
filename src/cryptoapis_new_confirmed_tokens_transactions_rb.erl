@@ -6,7 +6,7 @@
 
 -type cryptoapis_new_confirmed_tokens_transactions_rb() ::
     #{ 'context' => binary(),
-       'data' := cryptoapis_new_unconfirmed_tokens_transactions_rb_data:cryptoapis_new_unconfirmed_tokens_transactions_rb_data()
+       'data' := cryptoapis_new_confirmed_tokens_transactions_rb_data:cryptoapis_new_confirmed_tokens_transactions_rb_data()
      }.
 
 encode(#{ 'context' := Context,

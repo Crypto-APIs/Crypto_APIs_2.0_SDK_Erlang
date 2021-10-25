@@ -9,6 +9,7 @@
        'callbackSecretKey' => binary(),
        'callbackUrl' => binary(),
        'feePriority' := binary(),
+       'note' => binary(),
        'recipientAddress' := binary(),
        'tokenIdentifier' := binary()
      }.
@@ -17,6 +18,7 @@ encode(#{ 'amount' := Amount,
           'callbackSecretKey' := CallbackSecretKey,
           'callbackUrl' := CallbackUrl,
           'feePriority' := FeePriority,
+          'note' := Note,
           'recipientAddress' := RecipientAddress,
           'tokenIdentifier' := TokenIdentifier
         }) ->
@@ -24,6 +26,7 @@ encode(#{ 'amount' := Amount,
        'callbackSecretKey' => CallbackSecretKey,
        'callbackUrl' => CallbackUrl,
        'feePriority' => FeePriority,
+       'note' => Note,
        'recipientAddress' => RecipientAddress,
        'tokenIdentifier' => TokenIdentifier
      }.

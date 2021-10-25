@@ -4,11 +4,14 @@
          get_block_details_by_block_hash/4, get_block_details_by_block_hash/5,
          get_block_details_by_block_height/4, get_block_details_by_block_height/5,
          get_fee_recommendations/3, get_fee_recommendations/4,
-         get_latest_mined_block/3, get_latest_mined_block/4,
+         get_last_mined_block/3, get_last_mined_block/4,
          get_transaction_details_by_transaction_id/4, get_transaction_details_by_transaction_id/5,
-         list_transactions_by_address/4, list_transactions_by_address/5,
+         list_all_unconfirmed_transactions/3, list_all_unconfirmed_transactions/4,
+         list_confirmed_transactions_by_address/4, list_confirmed_transactions_by_address/5,
+         list_latest_mined_blocks/4, list_latest_mined_blocks/5,
          list_transactions_by_block_hash/4, list_transactions_by_block_hash/5,
-         list_transactions_by_block_height/4, list_transactions_by_block_height/5]).
+         list_transactions_by_block_height/4, list_transactions_by_block_height/5,
+         list_unconfirmed_transactions_by_address/4, list_unconfirmed_transactions_by_address/5]).
 
 -define(BASE_URL, <<"/v2">>).
 
@@ -96,14 +99,14 @@ get_fee_recommendations(Ctx, Blockchain, Network, Optional) ->
 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
-%% @doc Get Latest Mined Block
+%% @doc Get Last Mined Block
 %% Through this endpoint customers can fetch the last mined block in a specific blockchain network, along with its details. These could include the hash of the specific, the previous and the next block, its transactions count, its height, etc.     Blockchain specific data is information such as version, nonce, size, bits, merkleroot, etc.
--spec get_latest_mined_block(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_get_latest_mined_block_r:cryptoapis_get_latest_mined_block_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-get_latest_mined_block(Ctx, Blockchain, Network) ->
-    get_latest_mined_block(Ctx, Blockchain, Network, #{}).
+-spec get_last_mined_block(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_get_last_mined_block_r:cryptoapis_get_last_mined_block_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_last_mined_block(Ctx, Blockchain, Network) ->
+    get_last_mined_block(Ctx, Blockchain, Network, #{}).
 
--spec get_latest_mined_block(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_get_latest_mined_block_r:cryptoapis_get_latest_mined_block_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-get_latest_mined_block(Ctx, Blockchain, Network, Optional) ->
+-spec get_last_mined_block(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_get_last_mined_block_r:cryptoapis_get_last_mined_block_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_last_mined_block(Ctx, Blockchain, Network, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
@@ -138,20 +141,62 @@ get_transaction_details_by_transaction_id(Ctx, Blockchain, Network, TransactionI
 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
-%% @doc List Transactions By Address
-%% This endpoint will list transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.
--spec list_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_transactions_by_address_r:cryptoapis_list_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-list_transactions_by_address(Ctx, Blockchain, Network, Address) ->
-    list_transactions_by_address(Ctx, Blockchain, Network, Address, #{}).
+%% @doc List All Unconfirmed Transactions
+%% Through this endpoint customers can list all **unconfirmed**  transactions for a specified blockchain and network.
+-spec list_all_unconfirmed_transactions(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_list_all_unconfirmed_transactions_r:cryptoapis_list_all_unconfirmed_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_all_unconfirmed_transactions(Ctx, Blockchain, Network) ->
+    list_all_unconfirmed_transactions(Ctx, Blockchain, Network, #{}).
 
--spec list_transactions_by_address(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_transactions_by_address_r:cryptoapis_list_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-list_transactions_by_address(Ctx, Blockchain, Network, Address, Optional) ->
+-spec list_all_unconfirmed_transactions(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_all_unconfirmed_transactions_r:cryptoapis_list_all_unconfirmed_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_all_unconfirmed_transactions(Ctx, Blockchain, Network, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/address-transactions-unconfirmed">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List Confirmed Transactions By Address
+%% This endpoint will list transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.
+-spec list_confirmed_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_confirmed_transactions_by_address_r:cryptoapis_list_confirmed_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_confirmed_transactions_by_address(Ctx, Blockchain, Network, Address) ->
+    list_confirmed_transactions_by_address(Ctx, Blockchain, Network, Address, #{}).
+
+-spec list_confirmed_transactions_by_address(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_confirmed_transactions_by_address_r:cryptoapis_list_confirmed_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_confirmed_transactions_by_address(Ctx, Blockchain, Network, Address, Optional) ->
     _OptionalParams = maps:get(params, Optional, #{}),
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
     Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/transactions">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List Latest Mined Blocks
+%% Through this endpoint customers can list the latest 50 blocks that were mined.
+-spec list_latest_mined_blocks(ctx:ctx(), binary(), binary(), integer()) -> {ok, cryptoapis_list_latest_mined_blocks_r:cryptoapis_list_latest_mined_blocks_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_latest_mined_blocks(Ctx, Network, Blockchain, Count) ->
+    list_latest_mined_blocks(Ctx, Network, Blockchain, Count, #{}).
+
+-spec list_latest_mined_blocks(ctx:ctx(), binary(), binary(), integer(), maps:map()) -> {ok, cryptoapis_list_latest_mined_blocks_r:cryptoapis_list_latest_mined_blocks_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_latest_mined_blocks(Ctx, Network, Blockchain, Count, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/blocks/last/", Count, "">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
@@ -193,6 +238,27 @@ list_transactions_by_block_height(Ctx, Blockchain, Network, Height, Optional) ->
 
     Method = get,
     Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/blocks/height/", Height, "/transactions">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List Unconfirmed Transactions by Address
+%% Through this endpoint customers can list transactions by `address` that are **unconfirmed**.
+-spec list_unconfirmed_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_unconfirmed_transactions_by_address_r:cryptoapis_list_unconfirmed_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_unconfirmed_transactions_by_address(Ctx, Blockchain, Network, Address) ->
+    list_unconfirmed_transactions_by_address(Ctx, Blockchain, Network, Address, #{}).
+
+-spec list_unconfirmed_transactions_by_address(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_unconfirmed_transactions_by_address_r:cryptoapis_list_unconfirmed_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_unconfirmed_transactions_by_address(Ctx, Blockchain, Network, Address, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/address-transactions-unconfirmed/", Address, "">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
     Headers = [],
     Body1 = [],

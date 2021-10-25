@@ -8,16 +8,22 @@
     #{ 'callbackSecretKey' => binary(),
        'callbackUrl' => binary(),
        'feePriority' := binary(),
+       'note' => binary(),
+       'prepareStrategy' => binary(),
        'recipients' := list()
      }.
 
 encode(#{ 'callbackSecretKey' := CallbackSecretKey,
           'callbackUrl' := CallbackUrl,
           'feePriority' := FeePriority,
+          'note' := Note,
+          'prepareStrategy' := PrepareStrategy,
           'recipients' := Recipients
         }) ->
     #{ 'callbackSecretKey' => CallbackSecretKey,
        'callbackUrl' => CallbackUrl,
        'feePriority' => FeePriority,
+       'note' => Note,
+       'prepareStrategy' => PrepareStrategy,
        'recipients' => Recipients
      }.

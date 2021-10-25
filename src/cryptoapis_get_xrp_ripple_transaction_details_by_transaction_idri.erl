@@ -6,6 +6,7 @@
 
 -type cryptoapis_get_xrp_ripple_transaction_details_by_transaction_idri() ::
     #{ 'additionalData' := binary(),
+       'destinationTag' => integer(),
        'index' := binary(),
        'minedInBlockHash' := binary(),
        'minedInBlockHeight' := binary(),
@@ -23,6 +24,7 @@
      }.
 
 encode(#{ 'additionalData' := AdditionalData,
+          'destinationTag' := DestinationTag,
           'index' := Index,
           'minedInBlockHash' := MinedInBlockHash,
           'minedInBlockHeight' := MinedInBlockHeight,
@@ -39,6 +41,7 @@ encode(#{ 'additionalData' := AdditionalData,
           'value' := Value
         }) ->
     #{ 'additionalData' => AdditionalData,
+       'destinationTag' => DestinationTag,
        'index' => Index,
        'minedInBlockHash' => MinedInBlockHash,
        'minedInBlockHeight' => MinedInBlockHeight,

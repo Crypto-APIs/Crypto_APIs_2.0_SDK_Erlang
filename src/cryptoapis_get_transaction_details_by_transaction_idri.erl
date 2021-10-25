@@ -6,6 +6,7 @@
 
 -type cryptoapis_get_transaction_details_by_transaction_idri() ::
     #{ 'index' := integer(),
+       'isConfirmed' := binary(),
        'minedInBlockHash' => binary(),
        'minedInBlockHeight' => integer(),
        'recipients' := list(),
@@ -14,11 +15,11 @@
        'transactionHash' := binary(),
        'transactionId' := binary(),
        'fee' := cryptoapis_get_transaction_details_by_transaction_idri_fee:cryptoapis_get_transaction_details_by_transaction_idri_fee(),
-       'isConfirmed' := boolean(),
        'blockchainSpecific' := cryptoapis_get_transaction_details_by_transaction_idribs:cryptoapis_get_transaction_details_by_transaction_idribs()
      }.
 
 encode(#{ 'index' := Index,
+          'isConfirmed' := IsConfirmed,
           'minedInBlockHash' := MinedInBlockHash,
           'minedInBlockHeight' := MinedInBlockHeight,
           'recipients' := Recipients,
@@ -27,10 +28,10 @@ encode(#{ 'index' := Index,
           'transactionHash' := TransactionHash,
           'transactionId' := TransactionId,
           'fee' := Fee,
-          'isConfirmed' := IsConfirmed,
           'blockchainSpecific' := BlockchainSpecific
         }) ->
     #{ 'index' => Index,
+       'isConfirmed' => IsConfirmed,
        'minedInBlockHash' => MinedInBlockHash,
        'minedInBlockHeight' => MinedInBlockHeight,
        'recipients' => Recipients,
@@ -39,6 +40,5 @@ encode(#{ 'index' := Index,
        'transactionHash' => TransactionHash,
        'transactionId' => TransactionId,
        'fee' => Fee,
-       'isConfirmed' => IsConfirmed,
        'blockchainSpecific' => BlockchainSpecific
      }.

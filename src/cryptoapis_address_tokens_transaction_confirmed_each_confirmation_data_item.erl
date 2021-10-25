@@ -8,7 +8,7 @@
     #{ 'blockchain' := binary(),
        'network' := binary(),
        'address' := binary(),
-       'minedInBlock' := cryptoapis_address_tokens_transaction_confirmed_each_confirmation_data_item_mined_in_block:cryptoapis_address_tokens_transaction_confirmed_each_confirmation_data_item_mined_in_block(),
+       'minedInBlock' := cryptoapis_address_tokens_transaction_confirmed_data_item_mined_in_block:cryptoapis_address_tokens_transaction_confirmed_data_item_mined_in_block(),
        'transactionId' := binary(),
        'currentConfirmations' := integer(),
        'targetConfirmations' := integer(),

@@ -6,7 +6,7 @@
 
 -type cryptoapis_get_block_details_by_block_height_ribse() ::
     #{ 'difficulty' := binary(),
-       'nonce' := integer(),
+       'nonce' := binary(),
        'size' := integer(),
        'extraData' := binary(),
        'gasLimit' := binary(),
