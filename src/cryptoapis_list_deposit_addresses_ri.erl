@@ -6,15 +6,27 @@
 
 -type cryptoapis_list_deposit_addresses_ri() ::
     #{ 'address' := binary(),
+       'confirmedBalance' := cryptoapis_list_deposit_addresses_ri_confirmed_balance:cryptoapis_list_deposit_addresses_ri_confirmed_balance(),
        'createdTimestamp' := integer(),
-       'label' := binary()
+       'fungibleTokens' := list(),
+       'index' := binary(),
+       'label' := binary(),
+       'nonFungibleTokens' := list()
      }.
 
 encode(#{ 'address' := Address,
+          'confirmedBalance' := ConfirmedBalance,
           'createdTimestamp' := CreatedTimestamp,
-          'label' := Label
+          'fungibleTokens' := FungibleTokens,
+          'index' := Index,
+          'label' := Label,
+          'nonFungibleTokens' := NonFungibleTokens
         }) ->
     #{ 'address' => Address,
+       'confirmedBalance' => ConfirmedBalance,
        'createdTimestamp' => CreatedTimestamp,
-       'label' => Label
+       'fungibleTokens' => FungibleTokens,
+       'index' => Index,
+       'label' => Label,
+       'nonFungibleTokens' => NonFungibleTokens
      }.

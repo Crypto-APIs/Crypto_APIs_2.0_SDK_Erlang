@@ -17,7 +17,17 @@
        'gasUsed' := binary(),
        'inputData' := binary(),
        'nonce' := integer(),
-       'transactionStatus' := binary()
+       'transactionStatus' := binary(),
+       'bindingSig' := binary(),
+       'expiryHeight' := integer(),
+       'joinSplitPubKey' := binary(),
+       'joinSplitSig' := binary(),
+       'overwintered' := boolean(),
+       'vJoinSplit' := list(),
+       'vShieldedOutput' := list(),
+       'vShieldedSpend' := list(),
+       'valueBalance' := binary(),
+       'versionGroupId' := binary()
      }.
 
 encode(#{ 'locktime' := Locktime,
@@ -32,7 +42,17 @@ encode(#{ 'locktime' := Locktime,
           'gasUsed' := GasUsed,
           'inputData' := InputData,
           'nonce' := Nonce,
-          'transactionStatus' := TransactionStatus
+          'transactionStatus' := TransactionStatus,
+          'bindingSig' := BindingSig,
+          'expiryHeight' := ExpiryHeight,
+          'joinSplitPubKey' := JoinSplitPubKey,
+          'joinSplitSig' := JoinSplitSig,
+          'overwintered' := Overwintered,
+          'vJoinSplit' := VJoinSplit,
+          'vShieldedOutput' := VShieldedOutput,
+          'vShieldedSpend' := VShieldedSpend,
+          'valueBalance' := ValueBalance,
+          'versionGroupId' := VersionGroupId
         }) ->
     #{ 'locktime' => Locktime,
        'size' => Size,
@@ -46,5 +66,15 @@ encode(#{ 'locktime' := Locktime,
        'gasUsed' => GasUsed,
        'inputData' => InputData,
        'nonce' => Nonce,
-       'transactionStatus' => TransactionStatus
+       'transactionStatus' => TransactionStatus,
+       'bindingSig' => BindingSig,
+       'expiryHeight' => ExpiryHeight,
+       'joinSplitPubKey' => JoinSplitPubKey,
+       'joinSplitSig' => JoinSplitSig,
+       'overwintered' => Overwintered,
+       'vJoinSplit' => VJoinSplit,
+       'vShieldedOutput' => VShieldedOutput,
+       'vShieldedSpend' => VShieldedSpend,
+       'valueBalance' => ValueBalance,
+       'versionGroupId' => VersionGroupId
      }.

@@ -5,19 +5,16 @@
 -export_type([cryptoapis_wallet_as_a_service_address_balance_not_enough/0]).
 
 -type cryptoapis_wallet_as_a_service_address_balance_not_enough() ::
-    #{ 'apiVersion' := binary(),
-       'requestId' := binary(),
-       'context' => binary(),
-       'error' := cryptoapis_wallet_as_a_service_address_balance_not_enough_error:cryptoapis_wallet_as_a_service_address_balance_not_enough_error()
+    #{ 'code' := binary(),
+       'message' := binary(),
+       'details' => list()
      }.
 
-encode(#{ 'apiVersion' := ApiVersion,
-          'requestId' := RequestId,
-          'context' := Context,
-          'error' := Error
+encode(#{ 'code' := Code,
+          'message' := Message,
+          'details' := Details
         }) ->
-    #{ 'apiVersion' => ApiVersion,
-       'requestId' => RequestId,
-       'context' => Context,
-       'error' => Error
+    #{ 'code' => Code,
+       'message' => Message,
+       'details' => Details
      }.

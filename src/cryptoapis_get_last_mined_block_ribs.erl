@@ -21,8 +21,7 @@
        'minedInSeconds' := integer(),
        'sha3Uncles' := binary(),
        'totalDifficulty' := binary(),
-       'uncles' := list(),
-       'merkleroot' := binary()
+       'uncles' := list()
      }.
 
 encode(#{ 'difficulty' := Difficulty,
@@ -41,8 +40,7 @@ encode(#{ 'difficulty' := Difficulty,
           'minedInSeconds' := MinedInSeconds,
           'sha3Uncles' := Sha3Uncles,
           'totalDifficulty' := TotalDifficulty,
-          'uncles' := Uncles,
-          'merkleroot' := Merkleroot
+          'uncles' := Uncles
         }) ->
     #{ 'difficulty' => Difficulty,
        'nonce' => Nonce,
@@ -60,6 +58,5 @@ encode(#{ 'difficulty' := Difficulty,
        'minedInSeconds' => MinedInSeconds,
        'sha3Uncles' => Sha3Uncles,
        'totalDifficulty' => TotalDifficulty,
-       'uncles' => Uncles,
-       'merkleroot' => Merkleroot
+       'uncles' => Uncles
      }.

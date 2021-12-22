@@ -7,7 +7,7 @@
 -type cryptoapis_list_confirmed_transactions_by_address_ribsz_vin() ::
     #{ 'addresses' := list(),
        'coinbase' := binary(),
-       'scriptSig' := cryptoapis_list_confirmed_transactions_by_address_ribsz_script_sig:cryptoapis_list_confirmed_transactions_by_address_ribsz_script_sig(),
+       'scriptSig' := cryptoapis_get_transaction_details_by_transaction_idribsz_script_sig:cryptoapis_get_transaction_details_by_transaction_idribsz_script_sig(),
        'sequence' := integer(),
        'txid' := binary(),
        'txinwitness' := list(),

@@ -10,8 +10,8 @@
        'previousBlockHash' := binary(),
        'timestamp' := integer(),
        'transactionsCount' := integer(),
-       'totalCoins' := cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_coins:cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_coins(),
-       'totalFees' := cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_fees:cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_fees(),
+       'totalCoins' := cryptoapis_list_latest_mined_blocks_ri_total_coins:cryptoapis_list_latest_mined_blocks_ri_total_coins(),
+       'totalFees' := cryptoapis_list_latest_mined_blocks_ri_total_fees:cryptoapis_list_latest_mined_blocks_ri_total_fees(),
        'blockchainSpecific' := cryptoapis_list_latest_mined_blocks_ribs:cryptoapis_list_latest_mined_blocks_ribs()
      }.
 

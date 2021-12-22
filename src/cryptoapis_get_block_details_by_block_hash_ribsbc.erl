@@ -10,7 +10,7 @@
        'size' := integer(),
        'bits' := binary(),
        'chainwork' := binary(),
-       'merkleroot' := binary(),
+       'merkleRoot' := binary(),
        'version' := integer(),
        'versionHex' := binary()
      }.
@@ -20,7 +20,7 @@ encode(#{ 'difficulty' := Difficulty,
           'size' := Size,
           'bits' := Bits,
           'chainwork' := Chainwork,
-          'merkleroot' := Merkleroot,
+          'merkleRoot' := MerkleRoot,
           'version' := Version,
           'versionHex' := VersionHex
         }) ->
@@ -29,7 +29,7 @@ encode(#{ 'difficulty' := Difficulty,
        'size' => Size,
        'bits' => Bits,
        'chainwork' => Chainwork,
-       'merkleroot' => Merkleroot,
+       'merkleRoot' => MerkleRoot,
        'version' => Version,
        'versionHex' => VersionHex
      }.

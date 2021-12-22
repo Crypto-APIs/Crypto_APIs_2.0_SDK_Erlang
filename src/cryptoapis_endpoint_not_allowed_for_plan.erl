@@ -5,19 +5,16 @@
 -export_type([cryptoapis_endpoint_not_allowed_for_plan/0]).
 
 -type cryptoapis_endpoint_not_allowed_for_plan() ::
-    #{ 'apiVersion' := binary(),
-       'requestId' := binary(),
-       'context' => binary(),
-       'error' := cryptoapis_endpoint_not_allowed_for_plan_error:cryptoapis_endpoint_not_allowed_for_plan_error()
+    #{ 'code' := binary(),
+       'message' := binary(),
+       'details' => list()
      }.
 
-encode(#{ 'apiVersion' := ApiVersion,
-          'requestId' := RequestId,
-          'context' := Context,
-          'error' := Error
+encode(#{ 'code' := Code,
+          'message' := Message,
+          'details' := Details
         }) ->
-    #{ 'apiVersion' => ApiVersion,
-       'requestId' => RequestId,
-       'context' => Context,
-       'error' => Error
+    #{ 'code' => Code,
+       'message' => Message,
+       'details' => Details
      }.

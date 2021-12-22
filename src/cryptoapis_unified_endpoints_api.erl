@@ -16,7 +16,7 @@
 -define(BASE_URL, <<"/v2">>).
 
 %% @doc Get Address Details
-%% Through this endpoint the customer can receive basic information about a given address based on confirmed/synced blocks only. In the case where there are any incoming or outgoing **unconfirmed** transactions for the specific address, they **will not** be counted or calculated here.
+%% Through this endpoint the customer can receive basic information about a given address based on confirmed/synced blocks only. In the case where there are any incoming or outgoing **unconfirmed** transactions for the specific address, they **will not** be counted or calculated here. Applies only for coins.
 -spec get_address_details(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_get_address_details_r:cryptoapis_get_address_details_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 get_address_details(Ctx, Blockchain, Network, Address) ->
     get_address_details(Ctx, Blockchain, Network, Address, #{}).
@@ -184,7 +184,7 @@ list_confirmed_transactions_by_address(Ctx, Blockchain, Network, Address, Option
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Latest Mined Blocks
-%% Through this endpoint customers can list the latest 50 blocks that were mined.
+%% Through this endpoint customers can list **up to 50** from the latest blocks that were mined.
 -spec list_latest_mined_blocks(ctx:ctx(), binary(), binary(), integer()) -> {ok, cryptoapis_list_latest_mined_blocks_r:cryptoapis_list_latest_mined_blocks_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_latest_mined_blocks(Ctx, Network, Blockchain, Count) ->
     list_latest_mined_blocks(Ctx, Network, Blockchain, Count, #{}).

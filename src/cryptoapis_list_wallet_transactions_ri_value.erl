@@ -8,19 +8,16 @@
     #{ 'amount' := binary(),
        'convertedAmount' := binary(),
        'exchangeRateUnit' := binary(),
-       'symbol' := binary(),
-       'tokenIdentifier' => binary()
+       'symbol' := binary()
      }.
 
 encode(#{ 'amount' := Amount,
           'convertedAmount' := ConvertedAmount,
           'exchangeRateUnit' := ExchangeRateUnit,
-          'symbol' := Symbol,
-          'tokenIdentifier' := TokenIdentifier
+          'symbol' := Symbol
         }) ->
     #{ 'amount' => Amount,
        'convertedAmount' => ConvertedAmount,
        'exchangeRateUnit' => ExchangeRateUnit,
-       'symbol' => Symbol,
-       'tokenIdentifier' => TokenIdentifier
+       'symbol' => Symbol
      }.

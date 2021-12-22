@@ -5,7 +5,7 @@
 -export_type([cryptoapis_get_transaction_details_by_transaction_idribsbsc/0]).
 
 -type cryptoapis_get_transaction_details_by_transaction_idribsbsc() ::
-    #{ 'contract' => binary(),
+    #{ 'contract' := binary(),
        'gasLimit' := binary(),
        'gasPrice' := cryptoapis_get_transaction_details_by_transaction_idribsbsc_gas_price:cryptoapis_get_transaction_details_by_transaction_idribsbsc_gas_price(),
        'gasUsed' := binary(),

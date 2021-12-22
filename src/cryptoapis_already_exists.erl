@@ -5,19 +5,16 @@
 -export_type([cryptoapis_already_exists/0]).
 
 -type cryptoapis_already_exists() ::
-    #{ 'apiVersion' := binary(),
-       'requestId' := binary(),
-       'context' => binary(),
-       'error' := cryptoapis_already_exists_error:cryptoapis_already_exists_error()
+    #{ 'code' := binary(),
+       'message' := binary(),
+       'details' => list()
      }.
 
-encode(#{ 'apiVersion' := ApiVersion,
-          'requestId' := RequestId,
-          'context' := Context,
-          'error' := Error
+encode(#{ 'code' := Code,
+          'message' := Message,
+          'details' := Details
         }) ->
-    #{ 'apiVersion' => ApiVersion,
-       'requestId' => RequestId,
-       'context' => Context,
-       'error' => Error
+    #{ 'code' => Code,
+       'message' => Message,
+       'details' => Details
      }.

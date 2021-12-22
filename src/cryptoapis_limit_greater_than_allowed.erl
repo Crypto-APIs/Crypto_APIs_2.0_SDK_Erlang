@@ -5,19 +5,16 @@
 -export_type([cryptoapis_limit_greater_than_allowed/0]).
 
 -type cryptoapis_limit_greater_than_allowed() ::
-    #{ 'apiVersion' := binary(),
-       'requestId' := binary(),
-       'context' => binary(),
-       'error' := cryptoapis_limit_greater_than_allowed_error:cryptoapis_limit_greater_than_allowed_error()
+    #{ 'code' := binary(),
+       'message' := binary(),
+       'details' => list()
      }.
 
-encode(#{ 'apiVersion' := ApiVersion,
-          'requestId' := RequestId,
-          'context' := Context,
-          'error' := Error
+encode(#{ 'code' := Code,
+          'message' := Message,
+          'details' := Details
         }) ->
-    #{ 'apiVersion' => ApiVersion,
-       'requestId' => RequestId,
-       'context' => Context,
-       'error' => Error
+    #{ 'code' => Code,
+       'message' => Message,
+       'details' => Details
      }.

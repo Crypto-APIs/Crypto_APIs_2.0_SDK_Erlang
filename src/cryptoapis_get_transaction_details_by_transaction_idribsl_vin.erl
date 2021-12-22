@@ -8,7 +8,7 @@
     #{ 'addresses' := list(),
        'coinbase' => binary(),
        'scriptSig' := cryptoapis_get_transaction_details_by_transaction_idribsl_script_sig:cryptoapis_get_transaction_details_by_transaction_idribsl_script_sig(),
-       'sequence' := binary(),
+       'sequence' := integer(),
        'txid' => binary(),
        'txinwitness' := list(),
        'value' => binary(),

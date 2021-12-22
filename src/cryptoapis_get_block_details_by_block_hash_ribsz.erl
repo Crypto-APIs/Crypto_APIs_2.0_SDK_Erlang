@@ -10,7 +10,7 @@
        'size' := integer(),
        'bits' := binary(),
        'chainwork' := binary(),
-       'merkleroot' := binary(),
+       'merkleRoot' := binary(),
        'version' := integer()
      }.
 
@@ -19,7 +19,7 @@ encode(#{ 'difficulty' := Difficulty,
           'size' := Size,
           'bits' := Bits,
           'chainwork' := Chainwork,
-          'merkleroot' := Merkleroot,
+          'merkleRoot' := MerkleRoot,
           'version' := Version
         }) ->
     #{ 'difficulty' => Difficulty,
@@ -27,6 +27,6 @@ encode(#{ 'difficulty' := Difficulty,
        'size' => Size,
        'bits' => Bits,
        'chainwork' => Chainwork,
-       'merkleroot' => Merkleroot,
+       'merkleRoot' => MerkleRoot,
        'version' => Version
      }.

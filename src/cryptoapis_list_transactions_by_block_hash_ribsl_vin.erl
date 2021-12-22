@@ -7,7 +7,7 @@
 -type cryptoapis_list_transactions_by_block_hash_ribsl_vin() ::
     #{ 'addresses' := list(),
        'coinbase' => binary(),
-       'scriptSig' := cryptoapis_get_transaction_details_by_transaction_idribsl_script_sig:cryptoapis_get_transaction_details_by_transaction_idribsl_script_sig(),
+       'scriptSig' := cryptoapis_list_transactions_by_block_hash_ribsl_script_sig:cryptoapis_list_transactions_by_block_hash_ribsl_script_sig(),
        'sequence' := binary(),
        'txid' := binary(),
        'txinwitness' := list(),

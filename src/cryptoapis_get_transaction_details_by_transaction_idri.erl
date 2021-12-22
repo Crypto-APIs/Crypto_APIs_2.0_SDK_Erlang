@@ -6,7 +6,7 @@
 
 -type cryptoapis_get_transaction_details_by_transaction_idri() ::
     #{ 'index' := integer(),
-       'isConfirmed' := binary(),
+       'isConfirmed' := boolean(),
        'minedInBlockHash' => binary(),
        'minedInBlockHeight' => integer(),
        'recipients' := list(),

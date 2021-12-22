@@ -5,19 +5,16 @@
 -export_type([cryptoapis_wallet_as_a_service_no_deposit_addresses_found/0]).
 
 -type cryptoapis_wallet_as_a_service_no_deposit_addresses_found() ::
-    #{ 'apiVersion' := binary(),
-       'requestId' := binary(),
-       'context' => binary(),
-       'error' := cryptoapis_wallet_as_a_service_no_deposit_addresses_found_error:cryptoapis_wallet_as_a_service_no_deposit_addresses_found_error()
+    #{ 'code' := binary(),
+       'message' := binary(),
+       'details' => list()
      }.
 
-encode(#{ 'apiVersion' := ApiVersion,
-          'requestId' := RequestId,
-          'context' := Context,
-          'error' := Error
+encode(#{ 'code' := Code,
+          'message' := Message,
+          'details' := Details
         }) ->
-    #{ 'apiVersion' => ApiVersion,
-       'requestId' => RequestId,
-       'context' => Context,
-       'error' => Error
+    #{ 'code' => Code,
+       'message' => Message,
+       'details' => Details
      }.

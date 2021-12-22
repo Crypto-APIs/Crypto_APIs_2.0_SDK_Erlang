@@ -2,6 +2,7 @@
 
 -export([get_transaction_request_details/2, get_transaction_request_details/3,
          get_wallet_asset_details/4, get_wallet_asset_details/5,
+         get_wallet_transaction_details_by_transaction_id/4, get_wallet_transaction_details_by_transaction_id/5,
          list_deposit_addresses/4, list_deposit_addresses/5,
          list_supported_tokens/3, list_supported_tokens/4,
          list_wallet_transactions/4, list_wallet_transactions/5]).
@@ -42,6 +43,27 @@ get_wallet_asset_details(Ctx, Blockchain, Network, WalletId, Optional) ->
 
     Method = get,
     Path = [<<"/wallet-as-a-service/wallets/", WalletId, "/", Blockchain, "/", Network, "">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Get Wallet Transaction Details By Transaction ID
+%% Through this endpoint users can obtain Wallet transaction information by providing a `transactionId`. Customers can receive information only for a transaction that has been made from their own wallet.
+-spec get_wallet_transaction_details_by_transaction_id(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_get_wallet_transaction_details_by_transaction_idr:cryptoapis_get_wallet_transaction_details_by_transaction_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_wallet_transaction_details_by_transaction_id(Ctx, Blockchain, Network, TransactionId) ->
+    get_wallet_transaction_details_by_transaction_id(Ctx, Blockchain, Network, TransactionId, #{}).
+
+-spec get_wallet_transaction_details_by_transaction_id(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_get_wallet_transaction_details_by_transaction_idr:cryptoapis_get_wallet_transaction_details_by_transaction_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_wallet_transaction_details_by_transaction_id(Ctx, Blockchain, Network, TransactionId, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/wallet-as-a-service/wallets/", Blockchain, "/", Network, "/transactions/", TransactionId, "">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = [],

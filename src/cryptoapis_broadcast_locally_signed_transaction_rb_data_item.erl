@@ -6,7 +6,7 @@
 
 -type cryptoapis_broadcast_locally_signed_transaction_rb_data_item() ::
     #{ 'callbackSecretKey' => binary(),
-       'callbackUrl' := binary(),
+       'callbackUrl' => binary(),
        'signedTransactionHex' := binary()
      }.
 

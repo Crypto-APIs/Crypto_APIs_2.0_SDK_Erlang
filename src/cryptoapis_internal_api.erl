@@ -49,7 +49,7 @@ list_internal_transaction_details_by_transaction_hash(Ctx, Blockchain, Network, 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc List Internal Transactions By Address
-%% 
+%% Through this endpoint customers can list internal transactions by the `address` attribute.
 -spec list_internal_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_internal_transactions_by_address_r:cryptoapis_list_internal_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 list_internal_transactions_by_address(Ctx, Blockchain, Network, Address) ->
     list_internal_transactions_by_address(Ctx, Blockchain, Network, Address, #{}).

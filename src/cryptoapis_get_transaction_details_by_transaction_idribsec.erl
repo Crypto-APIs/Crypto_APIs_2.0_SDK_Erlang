@@ -10,7 +10,7 @@
        'gasPrice' := cryptoapis_get_transaction_details_by_transaction_idribsec_gas_price:cryptoapis_get_transaction_details_by_transaction_idribsec_gas_price(),
        'gasUsed' := binary(),
        'inputData' := binary(),
-       'nonce' := binary()
+       'nonce' := integer()
      }.
 
 encode(#{ 'contract' := Contract,

@@ -12,8 +12,7 @@
        'createdTimestamp' := integer(),
        'eventType' := binary(),
        'isActive' := boolean(),
-       'referenceId' := binary(),
-       'transactionId' := binary()
+       'referenceId' := binary()
      }.
 
 encode(#{ 'address' := Address,
@@ -23,8 +22,7 @@ encode(#{ 'address' := Address,
           'createdTimestamp' := CreatedTimestamp,
           'eventType' := EventType,
           'isActive' := IsActive,
-          'referenceId' := ReferenceId,
-          'transactionId' := TransactionId
+          'referenceId' := ReferenceId
         }) ->
     #{ 'address' => Address,
        'callbackSecretKey' => CallbackSecretKey,
@@ -33,6 +31,5 @@ encode(#{ 'address' := Address,
        'createdTimestamp' => CreatedTimestamp,
        'eventType' => EventType,
        'isActive' => IsActive,
-       'referenceId' => ReferenceId,
-       'transactionId' => TransactionId
+       'referenceId' => ReferenceId
      }.

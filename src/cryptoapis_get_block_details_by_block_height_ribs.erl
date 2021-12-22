@@ -20,8 +20,7 @@
        'gasUsed' := binary(),
        'minedInSeconds' := integer(),
        'sha3Uncles' := binary(),
-       'totalDifficulty' := binary(),
-       'merkleroot' := binary()
+       'totalDifficulty' := binary()
      }.
 
 encode(#{ 'difficulty' := Difficulty,
@@ -39,8 +38,7 @@ encode(#{ 'difficulty' := Difficulty,
           'gasUsed' := GasUsed,
           'minedInSeconds' := MinedInSeconds,
           'sha3Uncles' := Sha3Uncles,
-          'totalDifficulty' := TotalDifficulty,
-          'merkleroot' := Merkleroot
+          'totalDifficulty' := TotalDifficulty
         }) ->
     #{ 'difficulty' => Difficulty,
        'nonce' => Nonce,
@@ -57,6 +55,5 @@ encode(#{ 'difficulty' := Difficulty,
        'gasUsed' => GasUsed,
        'minedInSeconds' => MinedInSeconds,
        'sha3Uncles' => Sha3Uncles,
-       'totalDifficulty' => TotalDifficulty,
-       'merkleroot' => Merkleroot
+       'totalDifficulty' => TotalDifficulty
      }.

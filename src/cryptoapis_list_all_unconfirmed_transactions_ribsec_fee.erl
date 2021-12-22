@@ -5,10 +5,13 @@
 -export_type([cryptoapis_list_all_unconfirmed_transactions_ribsec_fee/0]).
 
 -type cryptoapis_list_all_unconfirmed_transactions_ribsec_fee() ::
-    #{ 'amount' := binary()
+    #{ 'amount' := binary(),
+       'unit' := binary()
      }.
 
-encode(#{ 'amount' := Amount
+encode(#{ 'amount' := Amount,
+          'unit' := Unit
         }) ->
-    #{ 'amount' => Amount
+    #{ 'amount' => Amount,
+       'unit' => Unit
      }.
