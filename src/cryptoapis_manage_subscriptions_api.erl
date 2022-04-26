@@ -2,6 +2,7 @@
 
 -export([activate_blockchain_event_subscription/3, activate_blockchain_event_subscription/4,
          delete_blockchain_event_subscription/4, delete_blockchain_event_subscription/5,
+         get_blockchain_event_subscription_details_by_reference_id/2, get_blockchain_event_subscription_details_by_reference_id/3,
          list_blockchain_events_subscriptions/3, list_blockchain_events_subscriptions/4]).
 
 -define(BASE_URL, <<"/v2">>).
@@ -40,6 +41,27 @@ delete_blockchain_event_subscription(Ctx, Blockchain, Network, ReferenceId, Opti
 
     Method = delete,
     Path = [<<"/blockchain-events/", Blockchain, "/", Network, "/subscriptions/", ReferenceId, "">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Get Blockchain Event Subscription Details By Reference ID
+%% Through this endpoint the customer can get detailed information for a callback subscription by providing its reference ID.    Currently Crypto APIs 2.0 offers certain Blockchain event endpoints which allow the user to subscribe for one/a few/all and receive callback notifications when the specific event occurs.
+-spec get_blockchain_event_subscription_details_by_reference_id(ctx:ctx(), binary()) -> {ok, cryptoapis_get_blockchain_event_subscription_details_by_reference_idr:cryptoapis_get_blockchain_event_subscription_details_by_reference_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_blockchain_event_subscription_details_by_reference_id(Ctx, ReferenceId) ->
+    get_blockchain_event_subscription_details_by_reference_id(Ctx, ReferenceId, #{}).
+
+-spec get_blockchain_event_subscription_details_by_reference_id(ctx:ctx(), binary(), maps:map()) -> {ok, cryptoapis_get_blockchain_event_subscription_details_by_reference_idr:cryptoapis_get_blockchain_event_subscription_details_by_reference_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_blockchain_event_subscription_details_by_reference_id(Ctx, ReferenceId, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-events/subscriptions/", ReferenceId, "">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = [],

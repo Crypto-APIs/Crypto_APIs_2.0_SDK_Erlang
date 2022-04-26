@@ -6,12 +6,18 @@
 
 -type cryptoapis_create_coins_transaction_request_from_address_ri_recipients() ::
     #{ 'address' := binary(),
-       'amount' := binary()
+       'addressTag' => integer(),
+       'amount' := binary(),
+       'classicAddress' => binary()
      }.
 
 encode(#{ 'address' := Address,
-          'amount' := Amount
+          'addressTag' := AddressTag,
+          'amount' := Amount,
+          'classicAddress' := ClassicAddress
         }) ->
     #{ 'address' => Address,
-       'amount' => Amount
+       'addressTag' => AddressTag,
+       'amount' => Amount,
+       'classicAddress' => ClassicAddress
      }.

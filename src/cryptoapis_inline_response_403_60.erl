@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_new_confirmed_coins_transactions_e403:cryptoapis_new_confirmed_coins_transactions_e403()
+       'error' := cryptoapis_list_tokens_transfers_by_transaction_hash_e403:cryptoapis_list_tokens_transfers_by_transaction_hash_e403()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

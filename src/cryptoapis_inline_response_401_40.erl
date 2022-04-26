@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_latest_mined_zilliqa_block_e401:cryptoapis_get_latest_mined_zilliqa_block_e401()
+       'error' := cryptoapis_get_last_mined_block_e401:cryptoapis_get_last_mined_block_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

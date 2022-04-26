@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_delete_blockchain_event_subscription_e401:cryptoapis_delete_blockchain_event_subscription_e401()
+       'error' := cryptoapis_estimate_transaction_smart_fee_e401:cryptoapis_estimate_transaction_smart_fee_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

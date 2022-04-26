@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_create_fungible_tokens_transaction_request_from_address_e400:cryptoapis_create_fungible_tokens_transaction_request_from_address_e400()
+       'error' := cryptoapis_get_wallet_asset_details_e400:cryptoapis_get_wallet_asset_details_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

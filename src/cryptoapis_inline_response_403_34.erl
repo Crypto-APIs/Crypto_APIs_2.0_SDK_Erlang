@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_list_supported_tokens_e403:cryptoapis_list_supported_tokens_e403()
+       'error' := cryptoapis_get_zilliqa_block_details_by_block_hash_e403:cryptoapis_get_zilliqa_block_details_by_block_hash_e403()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

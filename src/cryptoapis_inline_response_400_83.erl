@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_validate_address_e400:cryptoapis_validate_address_e400()
+       'error' := cryptoapis_get_address_details_from_callback_e400:cryptoapis_get_address_details_from_callback_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

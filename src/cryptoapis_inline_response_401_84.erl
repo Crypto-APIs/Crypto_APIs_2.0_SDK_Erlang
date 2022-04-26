@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_eip1559_fee_recommendations_e401:cryptoapis_get_eip1559_fee_recommendations_e401()
+       'error' := cryptoapis_get_transaction_details_by_transaction_id_from_callback_e401:cryptoapis_get_transaction_details_by_transaction_id_from_callback_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

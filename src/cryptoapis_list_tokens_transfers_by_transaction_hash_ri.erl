@@ -15,7 +15,8 @@
        'tokenType' := binary(),
        'tokensAmount' := binary(),
        'transactionHash' := binary(),
-       'transactionTimestamp' := integer()
+       'transactionTimestamp' := integer(),
+       'transactionFee' := cryptoapis_list_tokens_transfers_by_transaction_hash_ri_transaction_fee:cryptoapis_list_tokens_transfers_by_transaction_hash_ri_transaction_fee()
      }.
 
 encode(#{ 'contractAddress' := ContractAddress,
@@ -28,7 +29,8 @@ encode(#{ 'contractAddress' := ContractAddress,
           'tokenType' := TokenType,
           'tokensAmount' := TokensAmount,
           'transactionHash' := TransactionHash,
-          'transactionTimestamp' := TransactionTimestamp
+          'transactionTimestamp' := TransactionTimestamp,
+          'transactionFee' := TransactionFee
         }) ->
     #{ 'contractAddress' => ContractAddress,
        'minedInBlockHeight' => MinedInBlockHeight,
@@ -40,5 +42,6 @@ encode(#{ 'contractAddress' := ContractAddress,
        'tokenType' => TokenType,
        'tokensAmount' => TokensAmount,
        'transactionHash' => TransactionHash,
-       'transactionTimestamp' => TransactionTimestamp
+       'transactionTimestamp' => TransactionTimestamp,
+       'transactionFee' => TransactionFee
      }.

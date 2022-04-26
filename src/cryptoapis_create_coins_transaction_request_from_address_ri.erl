@@ -5,8 +5,10 @@
 -export_type([cryptoapis_create_coins_transaction_request_from_address_ri/0]).
 
 -type cryptoapis_create_coins_transaction_request_from_address_ri() ::
-    #{ 'callbackSecretKey' => binary(),
+    #{ 'addressTag' => integer(),
+       'callbackSecretKey' => binary(),
        'callbackUrl' => binary(),
+       'classicAddress' => binary(),
        'feePriority' := binary(),
        'note' => binary(),
        'recipients' := list(),
@@ -15,8 +17,10 @@
        'transactionRequestStatus' := binary()
      }.
 
-encode(#{ 'callbackSecretKey' := CallbackSecretKey,
+encode(#{ 'addressTag' := AddressTag,
+          'callbackSecretKey' := CallbackSecretKey,
           'callbackUrl' := CallbackUrl,
+          'classicAddress' := ClassicAddress,
           'feePriority' := FeePriority,
           'note' := Note,
           'recipients' := Recipients,
@@ -24,8 +28,10 @@ encode(#{ 'callbackSecretKey' := CallbackSecretKey,
           'transactionRequestId' := TransactionRequestId,
           'transactionRequestStatus' := TransactionRequestStatus
         }) ->
-    #{ 'callbackSecretKey' => CallbackSecretKey,
+    #{ 'addressTag' => AddressTag,
+       'callbackSecretKey' => CallbackSecretKey,
        'callbackUrl' => CallbackUrl,
+       'classicAddress' => ClassicAddress,
        'feePriority' => FeePriority,
        'note' => Note,
        'recipients' => Recipients,

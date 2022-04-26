@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_list_unconfirmed_omni_transactions_by_property_ide400:cryptoapis_list_unconfirmed_omni_transactions_by_property_ide400()
+       'error' := cryptoapis_get_xrp_ripple_block_details_by_block_height_e400:cryptoapis_get_xrp_ripple_block_details_by_block_height_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

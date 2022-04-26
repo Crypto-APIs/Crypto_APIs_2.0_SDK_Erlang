@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_block_details_by_block_height_from_callback_e403:cryptoapis_get_block_details_by_block_height_from_callback_e403()
+       'error' := cryptoapis_new_unconfirmed_tokens_transactions_e403:cryptoapis_new_unconfirmed_tokens_transactions_e403()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

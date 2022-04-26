@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_fee_recommendations_e401:cryptoapis_get_fee_recommendations_e401()
+       'error' := cryptoapis_list_hd_wallet_x_pub_y_pub_z_pub_transactions_e401:cryptoapis_list_hd_wallet_x_pub_y_pub_z_pub_transactions_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

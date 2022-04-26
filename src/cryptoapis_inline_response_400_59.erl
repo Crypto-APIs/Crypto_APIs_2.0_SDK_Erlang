@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_new_unconfirmed_tokens_transactions_e400:cryptoapis_new_unconfirmed_tokens_transactions_e400()
+       'error' := cryptoapis_list_unspent_transaction_outputs_by_address_e400:cryptoapis_list_unspent_transaction_outputs_by_address_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

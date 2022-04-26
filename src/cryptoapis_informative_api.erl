@@ -3,6 +3,8 @@
 -export([get_transaction_request_details/2, get_transaction_request_details/3,
          get_wallet_asset_details/4, get_wallet_asset_details/5,
          get_wallet_transaction_details_by_transaction_id/4, get_wallet_transaction_details_by_transaction_id/5,
+         list_all_assets_by_wallet_id/2, list_all_assets_by_wallet_id/3,
+         list_all_assets_from_all_wallets/1, list_all_assets_from_all_wallets/2,
          list_deposit_addresses/4, list_deposit_addresses/5,
          list_supported_tokens/3, list_supported_tokens/4,
          list_wallet_transactions/4, list_wallet_transactions/5]).
@@ -31,7 +33,7 @@ get_transaction_request_details(Ctx, TransactionRequestId, Optional) ->
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Get Wallet Asset Details
-%% Through this endpoint customers can obtain details about a specific Wallet/Vault.
+%% Through this endpoint customers can obtain details on all assets (coins, fungible tokens, non-fungible tokens) for the entire Wallet.
 -spec get_wallet_asset_details(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_get_wallet_asset_details_r:cryptoapis_get_wallet_asset_details_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
 get_wallet_asset_details(Ctx, Blockchain, Network, WalletId) ->
     get_wallet_asset_details(Ctx, Blockchain, Network, WalletId, #{}).
@@ -65,6 +67,48 @@ get_wallet_transaction_details_by_transaction_id(Ctx, Blockchain, Network, Trans
     Method = get,
     Path = [<<"/wallet-as-a-service/wallets/", Blockchain, "/", Network, "/transactions/", TransactionId, "">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List All Assets By Wallet ID
+%% Through this endpoint customers can obtain information about available assets in one of their wallets, regardless of the blockchain protocol or network, by providing walletId.
+-spec list_all_assets_by_wallet_id(ctx:ctx(), binary()) -> {ok, cryptoapis_list_all_assets_by_wallet_idr:cryptoapis_list_all_assets_by_wallet_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_all_assets_by_wallet_id(Ctx, WalletId) ->
+    list_all_assets_by_wallet_id(Ctx, WalletId, #{}).
+
+-spec list_all_assets_by_wallet_id(ctx:ctx(), binary(), maps:map()) -> {ok, cryptoapis_list_all_assets_by_wallet_idr:cryptoapis_list_all_assets_by_wallet_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_all_assets_by_wallet_id(Ctx, WalletId, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/wallet-as-a-service/wallets/", WalletId, "/assets">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List All Assets From All Wallets
+%% Through this endpoint customers can obtain information about available assets in all of their wallets, regardless of the blockchain protocol or network.
+-spec list_all_assets_from_all_wallets(ctx:ctx()) -> {ok, cryptoapis_list_all_assets_from_all_wallets_r:cryptoapis_list_all_assets_from_all_wallets_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_all_assets_from_all_wallets(Ctx) ->
+    list_all_assets_from_all_wallets(Ctx, #{}).
+
+-spec list_all_assets_from_all_wallets(ctx:ctx(), maps:map()) -> {ok, cryptoapis_list_all_assets_from_all_wallets_r:cryptoapis_list_all_assets_from_all_wallets_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_all_assets_from_all_wallets(Ctx, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/wallet-as-a-service/wallets/all-assets">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),

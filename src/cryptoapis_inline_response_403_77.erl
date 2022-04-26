@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_delete_automatic_coins_forwarding_e403:cryptoapis_delete_automatic_coins_forwarding_e403()
+       'error' := cryptoapis_mined_transaction_e403:cryptoapis_mined_transaction_e403()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_latest_mined_xrp_ripple_block_e401:cryptoapis_get_latest_mined_xrp_ripple_block_e401()
+       'error' := cryptoapis_list_all_assets_by_wallet_ide401:cryptoapis_list_all_assets_by_wallet_ide401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

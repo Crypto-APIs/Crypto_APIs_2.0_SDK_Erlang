@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_list_hd_wallet_x_pub_y_pub_z_pub_transactions_e403:cryptoapis_list_hd_wallet_x_pub_y_pub_z_pub_transactions_e403()
+       'error' := cryptoapis_get_wallet_transaction_details_by_transaction_ide403:cryptoapis_get_wallet_transaction_details_by_transaction_ide403()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

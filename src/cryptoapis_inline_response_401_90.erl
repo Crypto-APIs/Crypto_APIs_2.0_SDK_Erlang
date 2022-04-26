@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_asset_details_by_asset_ide401:cryptoapis_get_asset_details_by_asset_ide401()
+       'error' := cryptoapis_create_automatic_coins_forwarding_e401:cryptoapis_create_automatic_coins_forwarding_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

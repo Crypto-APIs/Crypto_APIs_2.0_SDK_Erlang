@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_new_confirmed_internal_transactions_and_each_confirmation_e400:cryptoapis_new_confirmed_internal_transactions_and_each_confirmation_e400()
+       'error' := cryptoapis_new_confirmed_tokens_transactions_e400:cryptoapis_new_confirmed_tokens_transactions_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

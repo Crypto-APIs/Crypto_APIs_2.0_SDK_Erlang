@@ -8,16 +8,19 @@
     #{ 'address' := binary(),
        'allowDuplicates' := boolean(),
        'callbackSecretKey' := binary(),
-       'callbackUrl' := binary()
+       'callbackUrl' := binary(),
+       'receiveCallbackOn' => integer()
      }.
 
 encode(#{ 'address' := Address,
           'allowDuplicates' := AllowDuplicates,
           'callbackSecretKey' := CallbackSecretKey,
-          'callbackUrl' := CallbackUrl
+          'callbackUrl' := CallbackUrl,
+          'receiveCallbackOn' := ReceiveCallbackOn
         }) ->
     #{ 'address' => Address,
        'allowDuplicates' => AllowDuplicates,
        'callbackSecretKey' => CallbackSecretKey,
-       'callbackUrl' => CallbackUrl
+       'callbackUrl' => CallbackUrl,
+       'receiveCallbackOn' => ReceiveCallbackOn
      }.

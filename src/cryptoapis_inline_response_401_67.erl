@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_activate_blockchain_event_subscription_e401:cryptoapis_activate_blockchain_event_subscription_e401()
+       'error' := cryptoapis_list_tokens_by_address_e401:cryptoapis_list_tokens_by_address_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

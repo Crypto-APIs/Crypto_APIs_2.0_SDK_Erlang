@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_exchange_rate_by_asset_symbols_e401:cryptoapis_get_exchange_rate_by_asset_symbols_e401()
+       'error' := cryptoapis_new_confirmed_internal_transactions_e401:cryptoapis_new_confirmed_internal_transactions_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_list_zilliqa_transactions_by_block_height_e400:cryptoapis_list_zilliqa_transactions_by_block_height_e400()
+       'error' := cryptoapis_list_zilliqa_transactions_by_block_hash_e400:cryptoapis_list_zilliqa_transactions_by_block_hash_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

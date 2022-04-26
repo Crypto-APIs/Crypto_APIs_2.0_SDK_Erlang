@@ -6,6 +6,7 @@
          get_xrp_(ripple)_block_details_by_block_height/3, get_xrp_(ripple)_block_details_by_block_height/4,
          get_xrp_(ripple)_transaction_details_by_transaction_id/3, get_xrp_(ripple)_transaction_details_by_transaction_id/4,
          list_xrp_(ripple)_transactions_by_address/3, list_xrp_(ripple)_transactions_by_address/4,
+         list_xrp_(ripple)_transactions_by_address_and_time_range/5, list_xrp_(ripple)_transactions_by_address_and_time_range/6,
          list_xrp_(ripple)_transactions_by_block_hash/3, list_xrp_(ripple)_transactions_by_block_hash/4,
          list_xrp_(ripple)_transactions_by_block_height/3, list_xrp_(ripple)_transactions_by_block_height/4]).
 
@@ -130,6 +131,27 @@ list_xrp_(ripple)_transactions_by_address(Ctx, Network, Address, Optional) ->
     Method = get,
     Path = [<<"/blockchain-data/xrp-specific/", Network, "/addresses/", Address, "/transactions">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset', 'transactionType'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List XRP (Ripple) Transactions By Address And Time Range
+%% Тhis endpoint lists XRP transactions by the attribute `address` and the query parameters `fromTimestamp` and `toTimestamp`  which gives customers the opportunity to filter the results by a specified time period.
+-spec list_xrp_(ripple)_transactions_by_address_and_time_range(ctx:ctx(), binary(), binary(), integer(), integer()) -> {ok, cryptoapis_list_xrp_ripple_transactions_by_address_and_time_range_r:cryptoapis_list_xrp_ripple_transactions_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_xrp_(ripple)_transactions_by_address_and_time_range(Ctx, Network, Address, FromTimestamp, ToTimestamp) ->
+    list_xrp_(ripple)_transactions_by_address_and_time_range(Ctx, Network, Address, FromTimestamp, ToTimestamp, #{}).
+
+-spec list_xrp_(ripple)_transactions_by_address_and_time_range(ctx:ctx(), binary(), binary(), integer(), integer(), maps:map()) -> {ok, cryptoapis_list_xrp_ripple_transactions_by_address_and_time_range_r:cryptoapis_list_xrp_ripple_transactions_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_xrp_(ripple)_transactions_by_address_and_time_range(Ctx, Network, Address, FromTimestamp, ToTimestamp, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/xrp-specific/", Network, "/addresses/", Address, "/transactions-by-time-range">>],
+    QS = lists:flatten([{<<"fromTimestamp">>, FromTimestamp}, {<<"toTimestamp">>, ToTimestamp}])++cryptoapis_utils:optional_params(['context', 'limit', 'offset', 'transactionType'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),

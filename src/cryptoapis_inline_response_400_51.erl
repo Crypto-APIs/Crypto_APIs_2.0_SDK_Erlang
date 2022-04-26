@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_list_internal_transactions_by_address_e400:cryptoapis_list_internal_transactions_by_address_e400()
+       'error' := cryptoapis_get_hd_wallet_x_pub_y_pub_z_pub_details_e400:cryptoapis_get_hd_wallet_x_pub_y_pub_z_pub_details_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

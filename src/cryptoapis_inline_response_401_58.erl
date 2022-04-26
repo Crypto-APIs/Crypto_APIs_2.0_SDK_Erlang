@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_new_unconfirmed_coins_transactions_e401:cryptoapis_new_unconfirmed_coins_transactions_e401()
+       'error' := cryptoapis_get_next_available_nonce_e401:cryptoapis_get_next_available_nonce_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

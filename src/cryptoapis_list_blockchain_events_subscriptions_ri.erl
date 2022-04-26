@@ -6,14 +6,15 @@
 
 -type cryptoapis_list_blockchain_events_subscriptions_ri() ::
     #{ 'address' := binary(),
-       'callbackSecretKey' := binary(),
+       'callbackSecretKey' => binary(),
        'callbackUrl' := binary(),
        'confirmationsCount' := integer(),
        'createdTimestamp' := integer(),
+       'deactivationReasons' => list(),
        'eventType' := binary(),
        'isActive' := boolean(),
        'referenceId' := binary(),
-       'transactionId' := binary()
+       'transactionId' => binary()
      }.
 
 encode(#{ 'address' := Address,
@@ -21,6 +22,7 @@ encode(#{ 'address' := Address,
           'callbackUrl' := CallbackUrl,
           'confirmationsCount' := ConfirmationsCount,
           'createdTimestamp' := CreatedTimestamp,
+          'deactivationReasons' := DeactivationReasons,
           'eventType' := EventType,
           'isActive' := IsActive,
           'referenceId' := ReferenceId,
@@ -31,6 +33,7 @@ encode(#{ 'address' := Address,
        'callbackUrl' => CallbackUrl,
        'confirmationsCount' => ConfirmationsCount,
        'createdTimestamp' => CreatedTimestamp,
+       'deactivationReasons' => DeactivationReasons,
        'eventType' => EventType,
        'isActive' => IsActive,
        'referenceId' => ReferenceId,

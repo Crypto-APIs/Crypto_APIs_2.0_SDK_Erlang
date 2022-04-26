@@ -5,7 +5,8 @@
 -export_type([cryptoapis_new_unconfirmed_coins_transactions_ri/0]).
 
 -type cryptoapis_new_unconfirmed_coins_transactions_ri() ::
-    #{ 'callbackSecretKey' := binary(),
+    #{ 'address' := binary(),
+       'callbackSecretKey' := binary(),
        'callbackUrl' := binary(),
        'createdTimestamp' := integer(),
        'eventType' := binary(),
@@ -13,14 +14,16 @@
        'referenceId' := binary()
      }.
 
-encode(#{ 'callbackSecretKey' := CallbackSecretKey,
+encode(#{ 'address' := Address,
+          'callbackSecretKey' := CallbackSecretKey,
           'callbackUrl' := CallbackUrl,
           'createdTimestamp' := CreatedTimestamp,
           'eventType' := EventType,
           'isActive' := IsActive,
           'referenceId' := ReferenceId
         }) ->
-    #{ 'callbackSecretKey' => CallbackSecretKey,
+    #{ 'address' => Address,
+       'callbackSecretKey' => CallbackSecretKey,
        'callbackUrl' => CallbackUrl,
        'createdTimestamp' => CreatedTimestamp,
        'eventType' => EventType,

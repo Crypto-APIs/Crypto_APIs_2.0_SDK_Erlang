@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_block_details_by_block_hash_from_callback_e400:cryptoapis_get_block_details_by_block_hash_from_callback_e400()
+       'error' := cryptoapis_new_unconfirmed_coins_transactions_e400:cryptoapis_new_unconfirmed_coins_transactions_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

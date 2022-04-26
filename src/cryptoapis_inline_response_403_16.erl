@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_list_all_unconfirmed_transactions_e403:cryptoapis_list_all_unconfirmed_transactions_e403()
+       'error' := cryptoapis_list_xrp_ripple_transactions_by_address_and_time_range_e403:cryptoapis_list_xrp_ripple_transactions_by_address_and_time_range_e403()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

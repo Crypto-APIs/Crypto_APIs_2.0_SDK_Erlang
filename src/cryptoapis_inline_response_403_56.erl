@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_list_tokens_by_address_e403:cryptoapis_list_tokens_by_address_e403()
+       'error' := cryptoapis_list_internal_transactions_by_address_e403:cryptoapis_list_internal_transactions_by_address_e403()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

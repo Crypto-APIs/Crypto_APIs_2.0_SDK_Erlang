@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_unconfirmed_omni_transaction_by_transaction_id_txid_e400:cryptoapis_get_unconfirmed_omni_transaction_by_transaction_id_txid_e400()
+       'error' := cryptoapis_list_xrp_ripple_transactions_by_block_hash_e400:cryptoapis_list_xrp_ripple_transactions_by_block_hash_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

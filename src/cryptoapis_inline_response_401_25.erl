@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_create_coins_transaction_from_address_for_whole_amount_e401:cryptoapis_create_coins_transaction_from_address_for_whole_amount_e401()
+       'error' := cryptoapis_list_transactions_by_block_height_e401:cryptoapis_list_transactions_by_block_height_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

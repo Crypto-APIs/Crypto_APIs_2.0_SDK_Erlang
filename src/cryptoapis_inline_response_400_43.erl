@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_sync_hd_wallet_x_pub_y_pub_z_pub_e400:cryptoapis_sync_hd_wallet_x_pub_y_pub_z_pub_e400()
+       'error' := cryptoapis_get_latest_mined_zilliqa_block_e400:cryptoapis_get_latest_mined_zilliqa_block_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

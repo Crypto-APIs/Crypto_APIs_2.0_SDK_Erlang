@@ -8,16 +8,19 @@
     #{ 'unit' := binary(),
        'fast' := binary(),
        'slow' := binary(),
-       'standard' := binary()
+       'standard' := binary(),
+       'feeCushionMultiplier' := binary()
      }.
 
 encode(#{ 'unit' := Unit,
           'fast' := Fast,
           'slow' := Slow,
-          'standard' := Standard
+          'standard' := Standard,
+          'feeCushionMultiplier' := FeeCushionMultiplier
         }) ->
     #{ 'unit' => Unit,
        'fast' => Fast,
        'slow' => Slow,
-       'standard' => Standard
+       'standard' => Standard,
+       'feeCushionMultiplier' => FeeCushionMultiplier
      }.

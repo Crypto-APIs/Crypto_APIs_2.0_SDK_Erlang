@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_get_last_mined_block_e401:cryptoapis_get_last_mined_block_e401()
+       'error' := cryptoapis_create_fungible_tokens_transaction_request_from_address_e401:cryptoapis_create_fungible_tokens_transaction_request_from_address_e401()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

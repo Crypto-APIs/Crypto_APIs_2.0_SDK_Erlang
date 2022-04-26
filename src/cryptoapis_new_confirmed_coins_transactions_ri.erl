@@ -11,6 +11,7 @@
        'createdTimestamp' := integer(),
        'eventType' := binary(),
        'isActive' := boolean(),
+       'receiveCallbackOn' := integer(),
        'referenceId' := binary()
      }.
 
@@ -20,6 +21,7 @@ encode(#{ 'address' := Address,
           'createdTimestamp' := CreatedTimestamp,
           'eventType' := EventType,
           'isActive' := IsActive,
+          'receiveCallbackOn' := ReceiveCallbackOn,
           'referenceId' := ReferenceId
         }) ->
     #{ 'address' => Address,
@@ -28,5 +30,6 @@ encode(#{ 'address' := Address,
        'createdTimestamp' => CreatedTimestamp,
        'eventType' => EventType,
        'isActive' => IsActive,
+       'receiveCallbackOn' => ReceiveCallbackOn,
        'referenceId' => ReferenceId
      }.

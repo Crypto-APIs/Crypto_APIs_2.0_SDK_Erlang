@@ -8,7 +8,7 @@
     #{ 'apiVersion' := binary(),
        'requestId' := binary(),
        'context' => binary(),
-       'error' := cryptoapis_delete_automatic_tokens_forwarding_e400:cryptoapis_delete_automatic_tokens_forwarding_e400()
+       'error' := cryptoapis_delete_blockchain_event_subscription_e400:cryptoapis_delete_blockchain_event_subscription_e400()
      }.
 
 encode(#{ 'apiVersion' := ApiVersion,

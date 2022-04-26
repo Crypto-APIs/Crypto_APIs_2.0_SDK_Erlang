@@ -1,19 +1,47 @@
 -module(cryptoapis_unified_endpoints_api).
 
--export([get_address_details/4, get_address_details/5,
+-export([estimate_transaction_smart_fee/3, estimate_transaction_smart_fee/4,
+         get_address_details/4, get_address_details/5,
          get_block_details_by_block_hash/4, get_block_details_by_block_hash/5,
          get_block_details_by_block_height/4, get_block_details_by_block_height/5,
          get_fee_recommendations/3, get_fee_recommendations/4,
          get_last_mined_block/3, get_last_mined_block/4,
+         get_next_available_nonce/4, get_next_available_nonce/5,
+         get_raw_transaction_data/4, get_raw_transaction_data/5,
          get_transaction_details_by_transaction_id/4, get_transaction_details_by_transaction_id/5,
          list_all_unconfirmed_transactions/3, list_all_unconfirmed_transactions/4,
+         list_confirmed_tokens_transfers_by_address_and_time_range/6, list_confirmed_tokens_transfers_by_address_and_time_range/7,
          list_confirmed_transactions_by_address/4, list_confirmed_transactions_by_address/5,
+         list_confirmed_transactions_by_address_and_time_range/6, list_confirmed_transactions_by_address_and_time_range/7,
+         list_internal_transactions_by_address_and_time_range/6, list_internal_transactions_by_address_and_time_range/7,
          list_latest_mined_blocks/4, list_latest_mined_blocks/5,
          list_transactions_by_block_hash/4, list_transactions_by_block_hash/5,
          list_transactions_by_block_height/4, list_transactions_by_block_height/5,
-         list_unconfirmed_transactions_by_address/4, list_unconfirmed_transactions_by_address/5]).
+         list_unconfirmed_transactions_by_address/4, list_unconfirmed_transactions_by_address/5,
+         list_unspent_transaction_outputs_by_address/4, list_unspent_transaction_outputs_by_address/5]).
 
 -define(BASE_URL, <<"/v2">>).
+
+%% @doc Estimate Transaction Smart Fee
+%% Through this endpoint, customers can estimate the approximate fee per kilobyte needed for a transaction to begin confirmation within the `confirmationTarget` blocks when possible. After which it will return the number of blocks for which the estimate is valid.
+-spec estimate_transaction_smart_fee(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_estimate_transaction_smart_fee_r:cryptoapis_estimate_transaction_smart_fee_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+estimate_transaction_smart_fee(Ctx, Blockchain, Network) ->
+    estimate_transaction_smart_fee(Ctx, Blockchain, Network, #{}).
+
+-spec estimate_transaction_smart_fee(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_estimate_transaction_smart_fee_r:cryptoapis_estimate_transaction_smart_fee_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+estimate_transaction_smart_fee(Ctx, Blockchain, Network, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/estimate-transaction-smart-fee">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'confirmationTarget', 'estimateMode'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Get Address Details
 %% Through this endpoint the customer can receive basic information about a given address based on confirmed/synced blocks only. In the case where there are any incoming or outgoing **unconfirmed** transactions for the specific address, they **will not** be counted or calculated here. Applies only for coins.
@@ -120,6 +148,48 @@ get_last_mined_block(Ctx, Blockchain, Network, Optional) ->
 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
+%% @doc Get Next Available Nonce
+%% Through this endpoint customers can get information about the next available nonce by providing the specific blockchain, network and address.
+-spec get_next_available_nonce(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_get_next_available_nonce_r:cryptoapis_get_next_available_nonce_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_next_available_nonce(Ctx, Blockchain, Network, Address) ->
+    get_next_available_nonce(Ctx, Blockchain, Network, Address, #{}).
+
+-spec get_next_available_nonce(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_get_next_available_nonce_r:cryptoapis_get_next_available_nonce_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_next_available_nonce(Ctx, Blockchain, Network, Address, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/next-available-nonce">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Get Raw Transaction Data
+%% Through this endpoint customers can get information on a transaction in its raw format by providing its `transactionId`.
+-spec get_raw_transaction_data(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_get_raw_transaction_data_r:cryptoapis_get_raw_transaction_data_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_raw_transaction_data(Ctx, Blockchain, Network, TransactionId) ->
+    get_raw_transaction_data(Ctx, Blockchain, Network, TransactionId, #{}).
+
+-spec get_raw_transaction_data(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_get_raw_transaction_data_r:cryptoapis_get_raw_transaction_data_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_raw_transaction_data(Ctx, Blockchain, Network, TransactionId, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/transactions/", TransactionId, "/raw-data">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
 %% @doc Get Transaction Details By Transaction ID
 %% Through this endpoint customers can obtain details about a transaction by the transaction's unique identifier. In UTXO-based protocols like BTC there are attributes such as `transactionId` and transaction `hash`. They still could be different. In protocols like Ethereum there is only one unique value and it's `hash`.
 -spec get_transaction_details_by_transaction_id(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_get_transaction_details_by_transaction_idr:cryptoapis_get_transaction_details_by_transaction_idr(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
@@ -162,6 +232,27 @@ list_all_unconfirmed_transactions(Ctx, Blockchain, Network, Optional) ->
 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
+%% @doc List Confirmed Tokens Transfers By Address And Time Range
+%% Through this endpoint customers can obtain a list with **confirmed** token transfers by the `address` attribute and the query parameters `fromTimestamp` and `toTimestamp` which gives customers the opportunity to filter the results by a specified time period.    {note}This refers only to transfers done for **confirmed tokens** not coins.{/note}
+-spec list_confirmed_tokens_transfers_by_address_and_time_range(ctx:ctx(), binary(), binary(), binary(), integer(), integer()) -> {ok, cryptoapis_list_confirmed_tokens_transfers_by_address_and_time_range_r:cryptoapis_list_confirmed_tokens_transfers_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_confirmed_tokens_transfers_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp) ->
+    list_confirmed_tokens_transfers_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp, #{}).
+
+-spec list_confirmed_tokens_transfers_by_address_and_time_range(ctx:ctx(), binary(), binary(), binary(), integer(), integer(), maps:map()) -> {ok, cryptoapis_list_confirmed_tokens_transfers_by_address_and_time_range_r:cryptoapis_list_confirmed_tokens_transfers_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_confirmed_tokens_transfers_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/tokens-transfers-by-time-range">>],
+    QS = lists:flatten([{<<"fromTimestamp">>, FromTimestamp}, {<<"toTimestamp">>, ToTimestamp}])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
 %% @doc List Confirmed Transactions By Address
 %% This endpoint will list transactions by an attribute `address`. The transactions listed will detail additional information such as hash, height, time of creation in Unix timestamp, etc.
 -spec list_confirmed_transactions_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_confirmed_transactions_by_address_r:cryptoapis_list_confirmed_transactions_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
@@ -176,6 +267,48 @@ list_confirmed_transactions_by_address(Ctx, Blockchain, Network, Address, Option
     Method = get,
     Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/transactions">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List Confirmed Transactions By Address And Time Range
+%% This endpoint will list confirmed transactions by the attribute `address` and the query parameters `fromTimestamp` and `toTimestamp` which gives customers the opportunity to filter the results by a specified time period.
+-spec list_confirmed_transactions_by_address_and_time_range(ctx:ctx(), binary(), binary(), binary(), integer(), integer()) -> {ok, cryptoapis_list_confirmed_transactions_by_address_and_time_range_r:cryptoapis_list_confirmed_transactions_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_confirmed_transactions_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp) ->
+    list_confirmed_transactions_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp, #{}).
+
+-spec list_confirmed_transactions_by_address_and_time_range(ctx:ctx(), binary(), binary(), binary(), integer(), integer(), maps:map()) -> {ok, cryptoapis_list_confirmed_transactions_by_address_and_time_range_r:cryptoapis_list_confirmed_transactions_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_confirmed_transactions_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/transactions-by-time-range">>],
+    QS = lists:flatten([{<<"fromTimestamp">>, FromTimestamp}, {<<"toTimestamp">>, ToTimestamp}])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List Internal Transactions By Address And Time Range
+%% Through this endpoint customers can list internal transactions by the `address` attribute and the query parameters `fromTimestamp` and `toTimestamp`  which gives customers the opportunity to filter the results by a specified time period.
+-spec list_internal_transactions_by_address_and_time_range(ctx:ctx(), binary(), binary(), binary(), integer(), integer()) -> {ok, cryptoapis_list_internal_transactions_by_address_and_time_range_r:cryptoapis_list_internal_transactions_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_internal_transactions_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp) ->
+    list_internal_transactions_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp, #{}).
+
+-spec list_internal_transactions_by_address_and_time_range(ctx:ctx(), binary(), binary(), binary(), integer(), integer(), maps:map()) -> {ok, cryptoapis_list_internal_transactions_by_address_and_time_range_r:cryptoapis_list_internal_transactions_by_address_and_time_range_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_internal_transactions_by_address_and_time_range(Ctx, Blockchain, Network, Address, FromTimestamp, ToTimestamp, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/internal-by-time-range">>],
+    QS = lists:flatten([{<<"fromTimestamp">>, FromTimestamp}, {<<"toTimestamp">>, ToTimestamp}])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
@@ -259,6 +392,27 @@ list_unconfirmed_transactions_by_address(Ctx, Blockchain, Network, Address, Opti
 
     Method = get,
     Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/address-transactions-unconfirmed/", Address, "">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc List Unspent Transaction Outputs By Address
+%% Through this endpoint customers can list their transactions' unspent outputs by `address`.
+-spec list_unspent_transaction_outputs_by_address(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_list_unspent_transaction_outputs_by_address_r:cryptoapis_list_unspent_transaction_outputs_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_unspent_transaction_outputs_by_address(Ctx, Blockchain, Network, Address) ->
+    list_unspent_transaction_outputs_by_address(Ctx, Blockchain, Network, Address, #{}).
+
+-spec list_unspent_transaction_outputs_by_address(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_unspent_transaction_outputs_by_address_r:cryptoapis_list_unspent_transaction_outputs_by_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+list_unspent_transaction_outputs_by_address(Ctx, Blockchain, Network, Address, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/unspent-outputs">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
     Headers = [],
     Body1 = [],
