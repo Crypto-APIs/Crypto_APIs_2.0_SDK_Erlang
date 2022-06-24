@@ -4,8 +4,11 @@
          new_block/4, new_block/5,
          new_confirmed_coins_transactions/4, new_confirmed_coins_transactions/5,
          new_confirmed_coins_transactions_and_each_confirmation/4, new_confirmed_coins_transactions_and_each_confirmation/5,
+         new_confirmed_coins_transactions_for_specific_amount/4, new_confirmed_coins_transactions_for_specific_amount/5,
          new_confirmed_internal_transactions/4, new_confirmed_internal_transactions/5,
          new_confirmed_internal_transactions_and_each_confirmation/4, new_confirmed_internal_transactions_and_each_confirmation/5,
+         new_confirmed_internal_transactions_for_specific_amount/4, new_confirmed_internal_transactions_for_specific_amount/5,
+         new_confirmed_token_transactions_for_specific_amount/4, new_confirmed_token_transactions_for_specific_amount/5,
          new_confirmed_tokens_transactions/4, new_confirmed_tokens_transactions/5,
          new_confirmed_tokens_transactions_and_each_confirmation/4, new_confirmed_tokens_transactions_and_each_confirmation/5,
          new_unconfirmed_coins_transactions/4, new_unconfirmed_coins_transactions/5,
@@ -97,6 +100,27 @@ new_confirmed_coins_transactions_and_each_confirmation(Ctx, Blockchain, Network,
 
     cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
+%% @doc New Confirmed Coins Transactions For Specific Amount
+%% Through this endpoint customers can create callback subscriptions for a specific event and \"amountHigherThan\" value. In this case the event is when there are new incoming or outgoing confirmed coins transactions for the specified blockchain and the amount is equal or higher than the value specified.  By creating this subscription the user will be notified by Crypto APIs 2.0 when that event occurs  filtered for the specified amount. The information is returned per specified address.    Being confirmed means that the transactions are verified by miners and added to the next block.
+-spec new_confirmed_coins_transactions_for_specific_amount(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_new_confirmed_coins_transactions_for_specific_amount_r:cryptoapis_new_confirmed_coins_transactions_for_specific_amount_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+new_confirmed_coins_transactions_for_specific_amount(Ctx, Blockchain, Network) ->
+    new_confirmed_coins_transactions_for_specific_amount(Ctx, Blockchain, Network, #{}).
+
+-spec new_confirmed_coins_transactions_for_specific_amount(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_new_confirmed_coins_transactions_for_specific_amount_r:cryptoapis_new_confirmed_coins_transactions_for_specific_amount_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+new_confirmed_coins_transactions_for_specific_amount(Ctx, Blockchain, Network, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = post,
+    Path = [<<"/blockchain-events/", Blockchain, "/", Network, "/subscriptions/coins-transactions-for-specific-amount">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = CryptoapisNewConfirmedCoinsTransactionsForSpecificAmountRb,
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([<<"application/json">>]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
 %% @doc New confirmed internal transactions
 %% Through this endpoint customers can create callback subscriptions for a specific event. In this case the event is when there are new confirmed internal transactions. By creating this subscription the user will be notified by Crypto APIs 2.0 when that event occurs.    Being confirmed means that the transactions are verified by miners and added to the next block.    {note}To have an operational callback subscription, you need to first verify a domain for the Callback URL. Please see more information on Callbacks [here](https://developers.cryptoapis.io/technical-documentation/general-information/callbacks#callback-url).{/note}    {warning}Crypto APIs will notify the user **only when** the event occurs. There are cases when the specific event doesn't happen at all, or takes a long time to do so. A callback notification **will not** be sent if the event does not or cannot occur, or will take long time to occur.{/warning}
 -spec new_confirmed_internal_transactions(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_new_confirmed_internal_transactions_r:cryptoapis_new_confirmed_internal_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
@@ -134,6 +158,48 @@ new_confirmed_internal_transactions_and_each_confirmation(Ctx, Blockchain, Netwo
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = CryptoapisNewConfirmedInternalTransactionsAndEachConfirmationRb,
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([<<"application/json">>]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc New Confirmed Internal Transactions For Specific Amount
+%% Through this endpoint customers can create callback subscriptions for a specific event and \"amountHigherThan\" value. In this case the event is when there are new confirmed internal transactions and the amount is equal or higher than a value, specified by the customer. By creating this subscription the user will be notified by Crypto APIs 2.0 when that event occurs, filtered for the specified amount.  Being confirmed means that the transactions are verified by miners and added to the next block
+-spec new_confirmed_internal_transactions_for_specific_amount(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_new_confirmed_internal_transactions_for_specific_amount_r:cryptoapis_new_confirmed_internal_transactions_for_specific_amount_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+new_confirmed_internal_transactions_for_specific_amount(Ctx, Blockchain, Network) ->
+    new_confirmed_internal_transactions_for_specific_amount(Ctx, Blockchain, Network, #{}).
+
+-spec new_confirmed_internal_transactions_for_specific_amount(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_new_confirmed_internal_transactions_for_specific_amount_r:cryptoapis_new_confirmed_internal_transactions_for_specific_amount_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+new_confirmed_internal_transactions_for_specific_amount(Ctx, Blockchain, Network, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = post,
+    Path = [<<"/blockchain-events/", Blockchain, "/", Network, "/subscriptions/internal-transactions-for-specific-amount">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = CryptoapisNewConfirmedInternalTransactionsForSpecificAmountRb,
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([<<"application/json">>]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc New Confirmed Token Transactions For Specific Amount
+%% Through this endpoint customers can create callback subscriptions for a specific event and \"amountHigherThan\" value. In this case the event is when there are new incoming or outgoing confirmed token transactions for the specified blockchain and the amount is equal or higher than the value specified. By creating this subscription the user will be notified by Crypto APIs 2.0 when that event occurs, filtered for the specified amount.  Being confirmed means that the transactions are verified by miners and added to the next block. This endpoint refers to tokens transactions only, not coins.
+-spec new_confirmed_token_transactions_for_specific_amount(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_new_confirmed_token_transactions_for_specific_amount_r:cryptoapis_new_confirmed_token_transactions_for_specific_amount_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+new_confirmed_token_transactions_for_specific_amount(Ctx, Blockchain, Network) ->
+    new_confirmed_token_transactions_for_specific_amount(Ctx, Blockchain, Network, #{}).
+
+-spec new_confirmed_token_transactions_for_specific_amount(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_new_confirmed_token_transactions_for_specific_amount_r:cryptoapis_new_confirmed_token_transactions_for_specific_amount_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+new_confirmed_token_transactions_for_specific_amount(Ctx, Blockchain, Network, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = post,
+    Path = [<<"/blockchain-events/", Blockchain, "/", Network, "/subscriptions/tokens-transfers-for-specific-amount">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = CryptoapisNewConfirmedTokenTransactionsForSpecificAmountRb,
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([<<"application/json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 

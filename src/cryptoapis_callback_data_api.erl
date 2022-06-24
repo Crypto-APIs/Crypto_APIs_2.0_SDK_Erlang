@@ -40,7 +40,7 @@ get_block_details_by_block_hash_from_callback(Ctx, Blockchain, Network, BlockHas
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = [<<"/blockcain-events/", Blockchain, "/", Network, "/blocks/hash/", BlockHash, "">>],
+    Path = [<<"/blockchain-events/", Blockchain, "/", Network, "/blocks/hash/", BlockHash, "">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = [],
@@ -61,7 +61,7 @@ get_block_details_by_block_height_from_callback(Ctx, Blockchain, Network, BlockH
     Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
 
     Method = get,
-    Path = [<<"/blockcain-events/", Blockchain, "/", Network, "/blocks/height/", BlockHeight, "">>],
+    Path = [<<"/blockchain-events/", Blockchain, "/", Network, "/blocks/height/", BlockHeight, "">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = [],
