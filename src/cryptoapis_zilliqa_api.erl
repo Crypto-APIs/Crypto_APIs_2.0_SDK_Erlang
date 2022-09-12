@@ -9,7 +9,7 @@
          list_zilliqa_transactions_by_block_hash/3, list_zilliqa_transactions_by_block_hash/4,
          list_zilliqa_transactions_by_block_height/3, list_zilliqa_transactions_by_block_height/4]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Get Latest Mined Zilliqa Block
 %% Through this endpoint users can obtain information on the latest block that has been mined on the Zilliqa blockchain. Data could include the current and previous block hashes, transaction count, and more.

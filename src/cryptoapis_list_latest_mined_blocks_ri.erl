@@ -10,8 +10,6 @@
        'previousBlockHash' := binary(),
        'timestamp' := integer(),
        'transactionsCount' := integer(),
-       'totalCoins' := cryptoapis_list_latest_mined_blocks_ri_total_coins:cryptoapis_list_latest_mined_blocks_ri_total_coins(),
-       'totalFees' := cryptoapis_list_latest_mined_blocks_ri_total_fees:cryptoapis_list_latest_mined_blocks_ri_total_fees(),
        'blockchainSpecific' := cryptoapis_list_latest_mined_blocks_ribs:cryptoapis_list_latest_mined_blocks_ribs()
      }.
 
@@ -20,8 +18,6 @@ encode(#{ 'hash' := Hash,
           'previousBlockHash' := PreviousBlockHash,
           'timestamp' := Timestamp,
           'transactionsCount' := TransactionsCount,
-          'totalCoins' := TotalCoins,
-          'totalFees' := TotalFees,
           'blockchainSpecific' := BlockchainSpecific
         }) ->
     #{ 'hash' => Hash,
@@ -29,7 +25,5 @@ encode(#{ 'hash' := Hash,
        'previousBlockHash' => PreviousBlockHash,
        'timestamp' => Timestamp,
        'transactionsCount' => TransactionsCount,
-       'totalCoins' => TotalCoins,
-       'totalFees' => TotalFees,
        'blockchainSpecific' => BlockchainSpecific
      }.

@@ -25,7 +25,9 @@
        'dsBlock' := integer(),
        'dsDifficulty' := binary(),
        'dsLeader' := binary(),
-       'microBlocks' := list()
+       'microBlocks' := list(),
+       'totalCoins' => cryptoapis_list_latest_mined_blocks_ribsx_total_coins:cryptoapis_list_latest_mined_blocks_ribsx_total_coins(),
+       'totalFees' := cryptoapis_list_latest_mined_blocks_ribsx_total_fees:cryptoapis_list_latest_mined_blocks_ribsx_total_fees()
      }.
 
 encode(#{ 'bits' := Bits,
@@ -48,7 +50,9 @@ encode(#{ 'bits' := Bits,
           'dsBlock' := DsBlock,
           'dsDifficulty' := DsDifficulty,
           'dsLeader' := DsLeader,
-          'microBlocks' := MicroBlocks
+          'microBlocks' := MicroBlocks,
+          'totalCoins' := TotalCoins,
+          'totalFees' := TotalFees
         }) ->
     #{ 'bits' => Bits,
        'chainwork' => Chainwork,
@@ -70,5 +74,7 @@ encode(#{ 'bits' := Bits,
        'dsBlock' => DsBlock,
        'dsDifficulty' => DsDifficulty,
        'dsLeader' => DsLeader,
-       'microBlocks' => MicroBlocks
+       'microBlocks' => MicroBlocks,
+       'totalCoins' => TotalCoins,
+       'totalFees' => TotalFees
      }.

@@ -6,7 +6,7 @@
 
 -type cryptoapis_get_transaction_details_by_transaction_id_from_callback_ribsd2_vout_inner() ::
     #{ 'isSpent' := boolean(),
-       'scriptPubKey' := cryptoapis_get_transaction_details_by_transaction_idribsd_vout_inner_script_pub_key:cryptoapis_get_transaction_details_by_transaction_idribsd_vout_inner_script_pub_key(),
+       'scriptPubKey' := cryptoapis_get_transaction_details_by_transaction_id_from_callback_ribsd2_vout_inner_script_pub_key:cryptoapis_get_transaction_details_by_transaction_id_from_callback_ribsd2_vout_inner_script_pub_key(),
        'value' := binary()
      }.
 

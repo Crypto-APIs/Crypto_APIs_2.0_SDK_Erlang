@@ -3,7 +3,7 @@
 -export([get_exchange_rate_by_asset_symbols/3, get_exchange_rate_by_asset_symbols/4,
          get_exchange_rate_by_assets_ids/3, get_exchange_rate_by_assets_ids/4]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Get Exchange Rate By Asset Symbols
 %% Through this endpoint customers can obtain exchange rates by asset symbols. The process represents the exchange rate value of a single unit of one asset versus another one. Data is provided per unique asset symbol.

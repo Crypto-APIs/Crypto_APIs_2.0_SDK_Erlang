@@ -5,8 +5,8 @@
 -export_type([cryptoapis_get_address_details_from_callback_ri_total_spent/0]).
 
 -type cryptoapis_get_address_details_from_callback_ri_total_spent() ::
-    #{ 'amount' => binary(),
-       'unit' => binary()
+    #{ 'amount' := binary(),
+       'unit' := binary()
      }.
 
 encode(#{ 'amount' := Amount,

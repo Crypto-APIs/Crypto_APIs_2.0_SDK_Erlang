@@ -10,7 +10,9 @@
        'gasPrice' := cryptoapis_list_confirmed_transactions_by_address_ribse_gas_price:cryptoapis_list_confirmed_transactions_by_address_ribse_gas_price(),
        'gasUsed' := binary(),
        'inputData' := binary(),
+       'internalTransactionsCount' := integer(),
        'nonce' := integer(),
+       'tokenTransfersCount' := integer(),
        'transactionStatus' := binary()
      }.
 
@@ -19,7 +21,9 @@ encode(#{ 'contract' := Contract,
           'gasPrice' := GasPrice,
           'gasUsed' := GasUsed,
           'inputData' := InputData,
+          'internalTransactionsCount' := InternalTransactionsCount,
           'nonce' := Nonce,
+          'tokenTransfersCount' := TokenTransfersCount,
           'transactionStatus' := TransactionStatus
         }) ->
     #{ 'contract' => Contract,
@@ -27,6 +31,8 @@ encode(#{ 'contract' := Contract,
        'gasPrice' => GasPrice,
        'gasUsed' => GasUsed,
        'inputData' => InputData,
+       'internalTransactionsCount' => InternalTransactionsCount,
        'nonce' => Nonce,
+       'tokenTransfersCount' => TokenTransfersCount,
        'transactionStatus' => TransactionStatus
      }.

@@ -6,7 +6,7 @@
          list_tokens_transfers_by_transaction_hash/4, list_tokens_transfers_by_transaction_hash/5,
          list_unconfirmed_tokens_transfers_by_address/4, list_unconfirmed_tokens_transfers_by_address/5]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Get Token Details by Contract Address
 %% Though this endpoint customers can obtain information about token details. This can be done by providing the `contact address` parameter.    {note}This address is **not** the same as the smart contract creator address.{/note}

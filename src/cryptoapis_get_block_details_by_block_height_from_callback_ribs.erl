@@ -17,18 +17,21 @@
        'weight' := integer(),
        'strippedsize' := integer(),
        'extraData' := binary(),
-       'gasLimit' := integer(),
-       'gasUsed' := integer(),
+       'gasLimit' := binary(),
+       'gasUsed' := binary(),
        'minedInSeconds' := integer(),
        'sha3Uncles' := binary(),
        'totalDifficulty' := binary(),
-       'uncles' => list(),
+       'uncles' := list(),
        'dsBlock' := integer(),
        'dsDifficulty' := binary(),
        'dsLeader' := binary(),
        'microBlocks' := list(),
        'totalCoins' := cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_coins:cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_coins(),
-       'totalFees' := cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_fees:cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_fees()
+       'totalFees' := cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_fees:cryptoapis_get_latest_mined_xrp_ripple_block_ri_total_fees(),
+       'bandwidthUsed' := binary(),
+       'burnedTrx' := binary(),
+       'energyUsed' := binary()
      }.
 
 encode(#{ 'bits' := Bits,
@@ -54,7 +57,10 @@ encode(#{ 'bits' := Bits,
           'dsLeader' := DsLeader,
           'microBlocks' := MicroBlocks,
           'totalCoins' := TotalCoins,
-          'totalFees' := TotalFees
+          'totalFees' := TotalFees,
+          'bandwidthUsed' := BandwidthUsed,
+          'burnedTrx' := BurnedTrx,
+          'energyUsed' := EnergyUsed
         }) ->
     #{ 'bits' => Bits,
        'chainwork' => Chainwork,
@@ -79,5 +85,8 @@ encode(#{ 'bits' := Bits,
        'dsLeader' => DsLeader,
        'microBlocks' => MicroBlocks,
        'totalCoins' => TotalCoins,
-       'totalFees' => TotalFees
+       'totalFees' => TotalFees,
+       'bandwidthUsed' => BandwidthUsed,
+       'burnedTrx' => BurnedTrx,
+       'energyUsed' => EnergyUsed
      }.

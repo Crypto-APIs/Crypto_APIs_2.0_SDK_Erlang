@@ -13,7 +13,7 @@
        'vout' := list(),
        'contract' := binary(),
        'gasLimit' := binary(),
-       'gasPrice' := cryptoapis_get_transaction_details_by_transaction_idribsbsc_gas_price:cryptoapis_get_transaction_details_by_transaction_idribsbsc_gas_price(),
+       'gasPrice' := cryptoapis_get_wallet_transaction_details_by_transaction_idribsp_gas_price:cryptoapis_get_wallet_transaction_details_by_transaction_idribsp_gas_price(),
        'gasUsed' := binary(),
        'inputData' := binary(),
        'nonce' := integer(),
@@ -27,7 +27,14 @@
        'vShieldedOutput' => list(),
        'vShieldedSpend' => list(),
        'valueBalance' := binary(),
-       'versionGroupId' := binary()
+       'versionGroupId' := binary(),
+       'amount' := binary(),
+       'bandwidthUsed' := binary(),
+       'energyUsed' := binary(),
+       'hasInternalTransactions' := boolean(),
+       'hasTokenTransfers' := boolean(),
+       'input' := binary(),
+       'status' := binary()
      }.
 
 encode(#{ 'locktime' := Locktime,
@@ -52,7 +59,14 @@ encode(#{ 'locktime' := Locktime,
           'vShieldedOutput' := VShieldedOutput,
           'vShieldedSpend' := VShieldedSpend,
           'valueBalance' := ValueBalance,
-          'versionGroupId' := VersionGroupId
+          'versionGroupId' := VersionGroupId,
+          'amount' := Amount,
+          'bandwidthUsed' := BandwidthUsed,
+          'energyUsed' := EnergyUsed,
+          'hasInternalTransactions' := HasInternalTransactions,
+          'hasTokenTransfers' := HasTokenTransfers,
+          'input' := Input,
+          'status' := Status
         }) ->
     #{ 'locktime' => Locktime,
        'size' => Size,
@@ -76,5 +90,12 @@ encode(#{ 'locktime' := Locktime,
        'vShieldedOutput' => VShieldedOutput,
        'vShieldedSpend' => VShieldedSpend,
        'valueBalance' => ValueBalance,
-       'versionGroupId' => VersionGroupId
+       'versionGroupId' => VersionGroupId,
+       'amount' => Amount,
+       'bandwidthUsed' => BandwidthUsed,
+       'energyUsed' => EnergyUsed,
+       'hasInternalTransactions' => HasInternalTransactions,
+       'hasTokenTransfers' => HasTokenTransfers,
+       'input' => Input,
+       'status' => Status
      }.

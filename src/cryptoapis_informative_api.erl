@@ -9,7 +9,7 @@
          list_supported_tokens/3, list_supported_tokens/4,
          list_wallet_transactions/4, list_wallet_transactions/5]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Get Transaction Request Details
 %% Through this endpoint customers can obtain details on transaction request.    {note}This regards **transaction requests**, which is not to be confused with **transactions**. Transaction requests may not be approved due to any reason, hence a transaction may not occur.{/note}

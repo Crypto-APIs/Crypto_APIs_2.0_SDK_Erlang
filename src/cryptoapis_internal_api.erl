@@ -4,7 +4,7 @@
          list_internal_transaction_details_by_transaction_hash/4, list_internal_transaction_details_by_transaction_hash/5,
          list_internal_transactions_by_address/4, list_internal_transactions_by_address/5]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Get Internal Transaction by Transaction Hash and Operation Id
 %% Through this endpoint customers can obtain detailed information about a specific Internal Transaction by using the attributes `transactionHash`  (the parent transaction's Hash) and `operationId` (type trace address).    An internal transaction is the result of a smart contract being triggered by an EOA or a subsequent contract call.

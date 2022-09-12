@@ -1,6 +1,7 @@
 -module(cryptoapis_unified_endpoints_api).
 
 -export([estimate_transaction_smart_fee/3, estimate_transaction_smart_fee/4,
+         get_address_balance/4, get_address_balance/5,
          get_address_details/4, get_address_details/5,
          get_block_details_by_block_hash/4, get_block_details_by_block_hash/5,
          get_block_details_by_block_height/4, get_block_details_by_block_height/5,
@@ -9,7 +10,6 @@
          get_next_available_nonce/4, get_next_available_nonce/5,
          get_raw_transaction_data/4, get_raw_transaction_data/5,
          get_transaction_details_by_transaction_id/4, get_transaction_details_by_transaction_id/5,
-         list_all_unconfirmed_transactions/3, list_all_unconfirmed_transactions/4,
          list_confirmed_tokens_transfers_by_address_and_time_range/6, list_confirmed_tokens_transfers_by_address_and_time_range/7,
          list_confirmed_transactions_by_address/4, list_confirmed_transactions_by_address/5,
          list_confirmed_transactions_by_address_and_time_range/6, list_confirmed_transactions_by_address_and_time_range/7,
@@ -20,7 +20,7 @@
          list_unconfirmed_transactions_by_address/4, list_unconfirmed_transactions_by_address/5,
          list_unspent_transaction_outputs_by_address/4, list_unspent_transaction_outputs_by_address/5]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Estimate Transaction Smart Fee
 %% Through this endpoint, customers can estimate the approximate fee per kilobyte needed for a transaction to begin confirmation within the `confirmationTarget` blocks when possible. After which it will return the number of blocks for which the estimate is valid.
@@ -36,6 +36,27 @@ estimate_transaction_smart_fee(Ctx, Blockchain, Network, Optional) ->
     Method = get,
     Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/estimate-transaction-smart-fee">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'confirmationTarget', 'estimateMode'], _OptionalParams),
+    Headers = [],
+    Body1 = [],
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Get Address Balance
+%% Through this endpoint the customer can receive the balance of a given address based on confirmed/synced blocks only. In the case where there are any incoming or outgoing unconfirmed transactions for the specific address, they will not be counted or calculated here. Applies only for coins.
+-spec get_address_balance(ctx:ctx(), binary(), binary(), binary()) -> {ok, cryptoapis_get_address_balance_r:cryptoapis_get_address_balance_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_address_balance(Ctx, Blockchain, Network, Address) ->
+    get_address_balance(Ctx, Blockchain, Network, Address, #{}).
+
+-spec get_address_balance(ctx:ctx(), binary(), binary(), binary(), maps:map()) -> {ok, cryptoapis_get_address_balance_r:cryptoapis_get_address_balance_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+get_address_balance(Ctx, Blockchain, Network, Address, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = get,
+    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/addresses/", Address, "/balance">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
@@ -204,27 +225,6 @@ get_transaction_details_by_transaction_id(Ctx, Blockchain, Network, TransactionI
     Method = get,
     Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/transactions/", TransactionId, "">>],
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
-    Headers = [],
-    Body1 = [],
-    ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),
-    Opts = maps:get(hackney_opts, Optional, []),
-
-    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
-
-%% @doc List All Unconfirmed Transactions
-%% Through this endpoint customers can list all **unconfirmed**  transactions for a specified blockchain and network.
--spec list_all_unconfirmed_transactions(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_list_all_unconfirmed_transactions_r:cryptoapis_list_all_unconfirmed_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-list_all_unconfirmed_transactions(Ctx, Blockchain, Network) ->
-    list_all_unconfirmed_transactions(Ctx, Blockchain, Network, #{}).
-
--spec list_all_unconfirmed_transactions(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_list_all_unconfirmed_transactions_r:cryptoapis_list_all_unconfirmed_transactions_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
-list_all_unconfirmed_transactions(Ctx, Blockchain, Network, Optional) ->
-    _OptionalParams = maps:get(params, Optional, #{}),
-    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
-
-    Method = get,
-    Path = [<<"/blockchain-data/", Blockchain, "/", Network, "/address-transactions-unconfirmed">>],
-    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context', 'limit', 'offset'], _OptionalParams),
     Headers = [],
     Body1 = [],
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([]),

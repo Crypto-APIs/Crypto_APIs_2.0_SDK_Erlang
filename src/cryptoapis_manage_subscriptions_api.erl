@@ -5,7 +5,7 @@
          get_blockchain_event_subscription_details_by_reference_id/2, get_blockchain_event_subscription_details_by_reference_id/3,
          list_blockchain_events_subscriptions/3, list_blockchain_events_subscriptions/4]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Activate Blockchain Event Subscription
 %% Through this endpoint customers can reactivate an event subscription (callback) which has been deactivated by the system. Deactivations could happen due to various reasons, most often \"maximum retry attempts reached\".

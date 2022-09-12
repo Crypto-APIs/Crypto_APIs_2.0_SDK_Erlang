@@ -8,19 +8,16 @@
     #{ 'unit' := binary(),
        'fast' := binary(),
        'slow' := binary(),
-       'standard' := binary(),
-       'feeMultiplier' => binary()
+       'standard' := binary()
      }.
 
 encode(#{ 'unit' := Unit,
           'fast' := Fast,
           'slow' := Slow,
-          'standard' := Standard,
-          'feeMultiplier' := FeeMultiplier
+          'standard' := Standard
         }) ->
     #{ 'unit' => Unit,
        'fast' => Fast,
        'slow' => Slow,
-       'standard' => Standard,
-       'feeMultiplier' => FeeMultiplier
+       'standard' => Standard
      }.

@@ -10,7 +10,7 @@
          list_xrp_(ripple)_transactions_by_block_hash/3, list_xrp_(ripple)_transactions_by_block_hash/4,
          list_xrp_(ripple)_transactions_by_block_height/3, list_xrp_(ripple)_transactions_by_block_height/4]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Get Latest Mined XRP (Ripple) Block
 %% Through this endpoint customers can fetch the last mined XRP block in the blockchain, along with its details. These could include the hash of the specific, the previous and the next block, its transactions count, its height, etc.     Since XRP is a different blockchain than Bitcoin and Ethereum, it isn't unified.

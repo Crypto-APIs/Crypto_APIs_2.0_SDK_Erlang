@@ -8,7 +8,7 @@
     #{ 'addresses' := list(),
        'asm' := binary(),
        'hex' := binary(),
-       'reqSigs' := integer(),
+       'reqSigs' => integer(),
        'type' := binary()
      }.
 

@@ -5,7 +5,7 @@
          get_block_details_by_block_height_from_callback/4, get_block_details_by_block_height_from_callback/5,
          get_transaction_details_by_transaction_id_from_callback/4, get_transaction_details_by_transaction_id_from_callback/5]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Get Address Details From Callback
 %% This endpoint creates a shortcut to obtain information from Blockchain data by going through Blockchain Events and a specific Event Subscription. It provides data for a specific address from the Event it takes part in only if the address already exists in the blockchain events subscriptions. It applies only for Events related to that customer.

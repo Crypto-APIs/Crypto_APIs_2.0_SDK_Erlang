@@ -6,27 +6,27 @@
 
 -type cryptoapis_get_last_mined_block_ribsz() ::
     #{ 'difficulty' := binary(),
-       'nonce' := binary(),
-       'size' := integer(),
        'bits' := binary(),
        'chainwork' := binary(),
        'merkleRoot' := binary(),
+       'nonce' := binary(),
+       'size' := integer(),
        'version' := integer()
      }.
 
 encode(#{ 'difficulty' := Difficulty,
-          'nonce' := Nonce,
-          'size' := Size,
           'bits' := Bits,
           'chainwork' := Chainwork,
           'merkleRoot' := MerkleRoot,
+          'nonce' := Nonce,
+          'size' := Size,
           'version' := Version
         }) ->
     #{ 'difficulty' => Difficulty,
-       'nonce' => Nonce,
-       'size' => Size,
        'bits' => Bits,
        'chainwork' => Chainwork,
        'merkleRoot' => MerkleRoot,
+       'nonce' => Nonce,
+       'size' => Size,
        'version' => Version
      }.

@@ -1,6 +1,7 @@
 -module(cryptoapis_features_api).
 
 -export([broadcast_locally_signed_transaction/4, broadcast_locally_signed_transaction/5,
+         convert_bitcoin_cash_address/4, convert_bitcoin_cash_address/5,
          decode_raw_transaction_hex/4, decode_raw_transaction_hex/5,
          decode_x_address/4, decode_x_address/5,
          derive_hd_wallet_(x_pub,_y_pub,_z_pub)_change_or_receiving_addresses/4, derive_hd_wallet_(x_pub,_y_pub,_z_pub)_change_or_receiving_addresses/5,
@@ -10,7 +11,7 @@
          get_eip_1559_fee_recommendations/3, get_eip_1559_fee_recommendations/4,
          validate_address/4, validate_address/5]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Broadcast Locally Signed Transaction
 %% Through this endpoint customers can broadcast transactions that have been already signed locally. Instead of using a node for broadcasting a signed transaction users can use this endpoint. We then keep the user posted about the status by sending you a callback with a success or failure status.    {warning}This can be prepared and signed **only** locally, not through the API. We can provide support only for the process of broadcasting.{/warning}
@@ -28,6 +29,27 @@ broadcast_locally_signed_transaction(Ctx, Blockchain, Network, Optional) ->
     QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
     Headers = [],
     Body1 = CryptoapisBroadcastLocallySignedTransactionRb,
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([<<"application/json">>]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
+
+%% @doc Convert Bitcoin Cash Address
+%% Through this endpoint customers will be able to convert addresses for the BCH (Bitcoin Cash) protocol from BCH legacy to cash address and vice versa.
+-spec convert_bitcoin_cash_address(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_convert_bitcoin_cash_address_r:cryptoapis_convert_bitcoin_cash_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+convert_bitcoin_cash_address(Ctx, Blockchain, Network) ->
+    convert_bitcoin_cash_address(Ctx, Blockchain, Network, #{}).
+
+-spec convert_bitcoin_cash_address(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_convert_bitcoin_cash_address_r:cryptoapis_convert_bitcoin_cash_address_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+convert_bitcoin_cash_address(Ctx, Blockchain, Network, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = post,
+    Path = [<<"/blockchain-tools/", Blockchain, "/", Network, "/address/convert">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = CryptoapisConvertBitcoinCashAddressRb,
     ContentTypeHeader = cryptoapis_utils:select_header_content_type([<<"application/json">>]),
     Opts = maps:get(hackney_opts, Optional, []),
 

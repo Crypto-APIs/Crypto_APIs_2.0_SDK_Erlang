@@ -6,32 +6,32 @@
 
 -type cryptoapis_get_last_mined_block_ribsd() ::
     #{ 'difficulty' := binary(),
-       'nonce' := binary(),
-       'size' := integer(),
        'bits' := binary(),
        'chainwork' := binary(),
        'merkleRoot' := binary(),
+       'nonce' := integer(),
+       'size' := integer(),
        'strippedSize' := integer(),
        'version' := integer(),
        'weight' := integer()
      }.
 
 encode(#{ 'difficulty' := Difficulty,
-          'nonce' := Nonce,
-          'size' := Size,
           'bits' := Bits,
           'chainwork' := Chainwork,
           'merkleRoot' := MerkleRoot,
+          'nonce' := Nonce,
+          'size' := Size,
           'strippedSize' := StrippedSize,
           'version' := Version,
           'weight' := Weight
         }) ->
     #{ 'difficulty' => Difficulty,
-       'nonce' => Nonce,
-       'size' => Size,
        'bits' => Bits,
        'chainwork' => Chainwork,
        'merkleRoot' => MerkleRoot,
+       'nonce' => Nonce,
+       'size' => Size,
        'strippedSize' => StrippedSize,
        'version' => Version,
        'weight' => Weight

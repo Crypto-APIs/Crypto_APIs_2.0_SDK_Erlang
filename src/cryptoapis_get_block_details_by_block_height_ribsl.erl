@@ -6,11 +6,11 @@
 
 -type cryptoapis_get_block_details_by_block_height_ribsl() ::
     #{ 'difficulty' := binary(),
-       'nonce' := binary(),
-       'size' := integer(),
        'bits' := binary(),
        'chainwork' := binary(),
        'merkleRoot' := binary(),
+       'nonce' := binary(),
+       'size' := integer(),
        'strippedSize' := integer(),
        'version' := integer(),
        'versionHex' := binary(),
@@ -18,22 +18,22 @@
      }.
 
 encode(#{ 'difficulty' := Difficulty,
-          'nonce' := Nonce,
-          'size' := Size,
           'bits' := Bits,
           'chainwork' := Chainwork,
           'merkleRoot' := MerkleRoot,
+          'nonce' := Nonce,
+          'size' := Size,
           'strippedSize' := StrippedSize,
           'version' := Version,
           'versionHex' := VersionHex,
           'weight' := Weight
         }) ->
     #{ 'difficulty' => Difficulty,
-       'nonce' => Nonce,
-       'size' => Size,
        'bits' => Bits,
        'chainwork' => Chainwork,
        'merkleRoot' => MerkleRoot,
+       'nonce' => Nonce,
+       'size' => Size,
        'strippedSize' => StrippedSize,
        'version' => Version,
        'versionHex' => VersionHex,

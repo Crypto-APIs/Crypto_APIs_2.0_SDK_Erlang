@@ -1,6 +1,7 @@
 -module(cryptoapis_create_subscriptions_for_api).
 
--export([mined_transaction/4, mined_transaction/5,
+-export([block_height_reached/4, block_height_reached/5,
+         mined_transaction/4, mined_transaction/5,
          new_block/4, new_block/5,
          new_confirmed_coins_transactions/4, new_confirmed_coins_transactions/5,
          new_confirmed_coins_transactions_and_each_confirmation/4, new_confirmed_coins_transactions_and_each_confirmation/5,
@@ -14,7 +15,28 @@
          new_unconfirmed_coins_transactions/4, new_unconfirmed_coins_transactions/5,
          new_unconfirmed_tokens_transactions/4, new_unconfirmed_tokens_transactions/5]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
+
+%% @doc Block Height Reached
+%% Through this endpoint customers can create callback subscriptions for a specific block height that hasn't been reached yet. In this case the event is when the specified block height in the request body is reached in a said blockchain. By creating this subscription the user will be notified by Crypto APIs 2.0 when that event occurs.
+-spec block_height_reached(ctx:ctx(), binary(), binary()) -> {ok, cryptoapis_block_height_reached_r:cryptoapis_block_height_reached_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+block_height_reached(Ctx, Blockchain, Network) ->
+    block_height_reached(Ctx, Blockchain, Network, #{}).
+
+-spec block_height_reached(ctx:ctx(), binary(), binary(), maps:map()) -> {ok, cryptoapis_block_height_reached_r:cryptoapis_block_height_reached_r(), cryptoapis_utils:response_info()} | {ok, hackney:client_ref()} | {error, term(), cryptoapis_utils:response_info()}.
+block_height_reached(Ctx, Blockchain, Network, Optional) ->
+    _OptionalParams = maps:get(params, Optional, #{}),
+    Cfg = maps:get(cfg, Optional, application:get_env(kuberl, config, #{})),
+
+    Method = post,
+    Path = [<<"/blockchain-events/", Blockchain, "/", Network, "/subscriptions/block-height-reached">>],
+    QS = lists:flatten([])++cryptoapis_utils:optional_params(['context'], _OptionalParams),
+    Headers = [],
+    Body1 = CryptoapisBlockHeightReachedRb,
+    ContentTypeHeader = cryptoapis_utils:select_header_content_type([<<"application/json">>]),
+    Opts = maps:get(hackney_opts, Optional, []),
+
+    cryptoapis_utils:request(Ctx, Method, [?BASE_URL, Path], QS, ContentTypeHeader++Headers, Body1, Opts, Cfg).
 
 %% @doc Mined transaction
 %% Through this endpoint customers can create callback subscriptions for a specific event. In this case the event is when a specific transaction is mined. By creating this subscription the user will be notified by Crypto APIs 2.0 when that event occurs. The information is returned per specified `transactionId`.    A transaction is mined when it is included in a new block in the blockchain.    {note}To have an operational callback subscription, you need to first verify a domain for the Callback URL. Please see more information on Callbacks [here](https://developers.cryptoapis.io/technical-documentation/general-information/callbacks#callback-url).{/note}    {warning}Crypto APIs will notify the user **only when** the event occurs. There are cases when the specific event doesn't happen at all, or takes a long time to do so. A callback notification **will not** be sent if the event does not or cannot occur, or will take long time to occur.{/warning}

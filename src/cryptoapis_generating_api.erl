@@ -2,7 +2,7 @@
 
 -export([generate_deposit_address/5, generate_deposit_address/6]).
 
--define(BASE_URL, <<"/v2">>).
+-define(BASE_URL, <<"">>).
 
 %% @doc Generate Deposit Address
 %% Through this endpoint customers can generate a new Receiving/Deposit Addresses into their Wallet.
