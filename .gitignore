@@ -1,3 +1,5 @@
 .idea
+rebar3
 rebar.lock
 _build
+erl_crash.dump
